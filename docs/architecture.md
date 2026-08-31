@@ -44,6 +44,46 @@ Se recuperan los estados válidos de los IDs actuales y se ignoran campos obsole
 
 No se guardan aperturas de soluciones, posición de scroll ni historial de sesiones. La pantalla se abre siempre con las soluciones cerradas. El enlace inicial puede llevar al primer ejercicio pendiente cuando se recupera progreso.
 
+## Exportación del progreso
+
+La acción **Exportar progreso** aparece de forma secundaria en el cierre. `createProgressExport` en `src/progress.js` recibe los metadatos de las sesiones conocidas y lee sus claves de progreso en `localStorage` en el momento de exportar. Actualmente se pasa únicamente la Sesión 1. No enumera el almacenamiento ni recoge claves ajenas, sesiones desconocidas o preferencias del navegador.
+
+El formato de intercambio tiene su propia versión y conserva los IDs estables:
+
+```json
+{
+  "format": "guitar-path-progress",
+  "schemaVersion": 1,
+  "exportedAt": "2026-08-31T14:00:00.000Z",
+  "sessions": [
+    {
+      "sessionId": "block-01-week-01-session-01",
+      "title": "Del acorde conocido a 1–3–5",
+      "block": { "number": 1, "title": "Entender el mástil" },
+      "week": { "number": 1, "title": "Notas e intervalos" },
+      "sessionNumber": 1,
+      "progress": {
+        "exercises": {
+          "listen-major-minor": "comfortable",
+          "unpack-known-chord": "practiced",
+          "map-g": "pending",
+          "build-d-triads": "pending",
+          "play-music": "pending"
+        },
+        "actualDuration": 28,
+        "note": "B ↔ B♭: lo escucho.\nMe costó localizar la tercera."
+      }
+    }
+  ]
+}
+```
+
+`exportedAt` es la fecha/hora UTC en formato ISO 8601 de la exportación, no la fecha de práctica. Los estados, minutos y nota se normalizan con la misma función que el guardado actual. Las sesiones sin registro se omiten; una primera visita sin guardar produce `sessions: []`. Si falla la lectura o el JSON guardado no se puede interpretar, no se descarga una copia vacía: se muestra un aviso. Los cambios que no hayan podido guardarse no forman parte del archivo.
+
+La función solo lee y devuelve objetos nuevos; no escribe, borra ni migra registros. El código de interfaz crea un `Blob` JSON UTF-8 con sangrado y lo descarga como `guitar-path-progress-AAAA-MM-DD.json`, usando la misma fecha UTC. El enlace temporal se elimina y su URL se libera después de iniciar la descarga.
+
+El almacenamiento sigue siendo exclusivamente local. La exportación no contacta con ChatGPT ni con ningún servidor: compartir el fichero es una acción manual del usuario. El fichero incluye las notas libres. **No existe importación, sincronización ni historial de intentos**; exportar tampoco crea un nuevo intento ni cambia los estados `pending`, `practiced` y `comfortable`.
+
 ## Publicación en GitHub Pages
 
 La aplicación se publica en `https://sergioberdiales.github.io/guitar-path/`. El workflow `.github/workflows/deploy-pages.yml` se ejecuta en pushes a `main` o mediante `workflow_dispatch`. El job `build` usa Node.js 22, `npm ci`, los tests y `npm run build`; sube únicamente `dist/` como artefacto. El job `deploy` configura Pages y publica ese artefacto en el entorno `github-pages`.

@@ -22,8 +22,11 @@ Abre la dirección local que imprime Vite, normalmente `http://localhost:5173/gu
 - Revela por separado D mayor y D menor después de intentar construirlos.
 - Marca cada ejercicio como Pendiente, Practicado o Cómodo. Puedes cambiarlo también en el cierre.
 - Registra los minutos aproximados y, si quieres, una nota. Todo se guarda automáticamente.
+- En el cierre, pulsa **Exportar progreso** para descargar una copia JSON del progreso guardado, con el contexto de la sesión. Puedes compartirla con ChatGPT para revisarla; incluye tu nota, así que revísala antes de compartirla.
 
 El progreso se recupera al volver desde el mismo navegador y origen. «Cómodo» es una percepción de esta sesión, no una certificación de dominio. Borrar los datos del navegador elimina el progreso; los modos privados o el almacenamiento bloqueado pueden impedir conservarlo. Un cambio de dominio, protocolo o puerto también cambia el almacenamiento disponible. No se guarda un historial de intentos.
+
+El archivo se llama `guitar-path-progress-AAAA-MM-DD.json` (fecha UTC). Actualmente incluye la Sesión 1 si tiene un registro guardado; si no, contiene `sessions: []`. La descarga no modifica el progreso ni envía datos a ningún servicio. Todavía no existe importación: esta copia sirve para conservar y consultar los datos, no para restaurarlos desde la aplicación.
 
 ## Comprobar
 
@@ -33,9 +36,11 @@ npm run build
 npm run preview
 ```
 
-Los tests usan el runner de Node, sin dependencias adicionales. Cubren persistencia, datos corruptos, estados inválidos, errores de almacenamiento y el contenido mínimo de la sesión.
+Los tests usan el runner de Node, sin dependencias adicionales. Cubren persistencia, datos corruptos, estados inválidos, errores de almacenamiento, el contenido mínimo de la sesión y la exportación sin modificar el almacenamiento ni incluir claves ajenas.
 
 Para una comprobación manual: cambia estados desde un ejercicio y desde el cierre; introduce duración y nota; recarga o cierra y vuelve a abrir; comprueba que los valores permanecen y que las soluciones vuelven a estar ocultas. Prueba también una pantalla de 375 px y navegación con teclado.
+
+Para comprobar la exportación, descarga el JSON desde el cierre y revisa sus metadatos, estados, minutos y nota (también con acentos y saltos de línea). Repite después de editar y guardar una nota: el nuevo archivo debe reflejar ese cambio, sin modificar el progreso. Las exportaciones son copias del estado actual, no un historial de intentos.
 
 ## Archivos principales
 

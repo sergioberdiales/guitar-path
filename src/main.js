@@ -1,5 +1,5 @@
 import './style.css';
-import { exerciseStates, loadProgress, saveProgress } from './progress.js';
+import { createProgressExport, exerciseStates, loadProgress, saveProgress } from './progress.js';
 
 const app = document.querySelector('#app');
 const sessionPath = `${import.meta.env.BASE_URL}content/course/block-01/week-01/session-01.json`;
@@ -117,6 +117,11 @@ function renderSession(session, progress) {
           <div class="duration-field"><label for="actual-duration">Duración real <span>(aproximada)</span></label><div class="duration-input"><input id="actual-duration" type="number" inputmode="numeric" min="1" step="1" placeholder="—" value="${progress.actualDuration ?? ''}" aria-describedby="duration-help"><span>minutos</span></div><p class="field-help" id="duration-help">Puedes dejarla en blanco. No hace falta cronometrar.</p></div>
           <div class="note-field"><label for="session-note">${escape(session.closing.noteQuestion)} <span>(opcional)</span></label><textarea id="session-note" rows="4" placeholder="Una idea, una dificultad, algo que quieras recordar…">${escape(progress.note)}</textarea></div>
           <p class="save-feedback" id="save-feedback" role="status">Se guarda automáticamente en este navegador.</p>
+          <div class="export-progress">
+            <button class="export-button" id="export-progress" type="button" aria-describedby="export-help">Exportar progreso</button>
+            <p class="field-help" id="export-help">Descarga una copia local para revisar tu progreso fuera de la aplicación o compartirlo con ChatGPT. El archivo incluye tu nota.</p>
+            <p class="field-help" id="export-feedback" role="status"></p>
+          </div>
         </section>
         <footer class="page-footer"><span>Guitar Path <span aria-hidden="true">/</span> Menos pantalla, más guitarra.</span><a href="#main">Volver arriba ↑</a></footer>
       </main>
@@ -175,6 +180,32 @@ function wireProgress(session, progress) {
   };
   noteInput.addEventListener('input', updateNote);
   noteInput.addEventListener('blur', updateNote);
+
+  document.querySelector('#export-progress').addEventListener('click', () => {
+    const exportFeedback = document.querySelector('#export-feedback');
+    try {
+      const data = createProgressExport([session]);
+      const blob = new Blob([JSON.stringify(data, null, 2) + '\n'], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `guitar-path-progress-${data.exportedAt.slice(0, 10)}.json`;
+      link.hidden = true;
+      document.body.append(link);
+      try {
+        link.click();
+      } finally {
+        link.remove();
+        // Give the browser time to start the download before releasing the URL.
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+      exportFeedback.textContent = data.sessions.length
+        ? 'Archivo preparado. Revisa las descargas de tu navegador.'
+        : 'Archivo preparado sin registros: todavía no hay progreso guardado.';
+    } catch {
+      exportFeedback.textContent = 'No se ha podido exportar. Comprueba que el almacenamiento local está disponible y que el navegador permite la descarga. No se ha modificado tu progreso.';
+    }
+  });
 }
 
 async function start() {

@@ -55,3 +55,26 @@ export function saveProgress(session, progress, getStorage = () => window.localS
     return { error: 'No se ha podido guardar. Los cambios se conservan solo mientras esta página siga abierta. Revisa el almacenamiento de tu navegador.' };
   }
 }
+
+// Read only known session keys; never enumerate or write browser storage.
+// Let read/parse errors reach the caller instead of exporting a false empty copy.
+export function createProgressExport(sessions, getStorage = () => window.localStorage, exportedAt = new Date()) {
+  const storage = getStorage();
+  return {
+    format: 'guitar-path-progress',
+    schemaVersion: 1,
+    exportedAt: exportedAt.toISOString(),
+    sessions: sessions.flatMap((session) => {
+      const raw = storage.getItem(storageKey(session.id));
+      if (raw === null) return [];
+      return [{
+        sessionId: session.id,
+        title: session.title,
+        block: { number: session.block.number, title: session.block.title },
+        week: { number: session.week.number, title: session.week.title },
+        sessionNumber: session.number,
+        progress: normalizeProgress(JSON.parse(raw), session),
+      }];
+    }),
+  };
+}
