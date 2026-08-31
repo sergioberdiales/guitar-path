@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "id": "block-01-week-01-session-01",
+  "title": "Del acorde conocido a 1–3–5",
+  "block": { "number": 1, "title": "Entender el mástil" },
+  "week": { "number": 1, "title": "Notas e intervalos" },
+  "number": 1,
+  "estimatedDuration": "25–30 min",
+  "objective": "Empezar a relacionar formas de acordes ya conocidas con las funciones 1, 3 y 5, y distinguir físicamente y auditivamente tercera mayor y tercera menor.",
+  "introduction": {
+    "title": "Ya conoces las formas. Vamos a escuchar qué hay dentro.",
+    "text": "No vamos a memorizar diagramas nuevos. Vamos a desmontar acordes que ya sabes tocar para entender qué hay dentro.",
+    "examples": [
+      { "label": "Tríada mayor", "value": "1 – 3 – 5" },
+      { "label": "Tríada menor", "value": "1 – ♭3 – 5" }
+    ],
+    "takeaway": "La tercera es la nota que determina aquí si el acorde es mayor o menor."
+  },
+  "resources": [
+    {
+      "id": "justin-triads",
+      "type": "video",
+      "title": "How to (Easily) Play Triad Chords on Guitar",
+      "author": "JustinGuitar",
+      "youtubeId": "qWS22cV9REg",
+      "approximateDuration": "10 min",
+      "purpose": "Introducción visual y práctica a qué son las tríadas y cómo pueden utilizarse musicalmente en la guitarra.",
+      "required": false,
+      "label": "Introducción visual"
+    },
+    {
+      "id": "paul-davids-triads",
+      "type": "video",
+      "title": "How Triads TRULY Unlock The Fretboard (Ft. Ariel Posen)",
+      "author": "Paul Davids",
+      "youtubeId": "rh6HEF5Dy2I",
+      "approximateDuration": null,
+      "purpose": "Mostrar en un contexto musical real por qué las tríadas son útiles para comprender y recorrer el diapasón, sin quedarse en la teoría abstracta.",
+      "required": false,
+      "label": "Para profundizar"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "listen-major-minor",
+      "title": "Escuchar mayor y menor",
+      "approximateDuration": "5 min",
+      "explanation": "Con G como centro tonal, escucha lo que cambia al mover una sola nota.",
+      "steps": [
+        {
+          "instructions": [
+            "Toca individualmente G – B – D. Después, G – B♭ – D.",
+            "Alterna varias veces entre ambas combinaciones.",
+            "Escucha especialmente qué ocurre al cambiar B ↔ B♭."
+          ],
+          "examples": [
+            { "label": "G mayor", "value": "G – B – D", "detail": "1 – 3 – 5" },
+            { "label": "G menor", "value": "G – B♭ – D", "detail": "1 – ♭3 – 5" }
+          ]
+        }
+      ],
+      "takeaway": "Solo hemos desplazado la tercera un semitono. No necesitas una forma de acorde nueva: puedes tocar las notas individualmente.",
+      "completion": ["Puedes explicar qué nota ha cambiado, cuánto ha cambiado y cuál produce el sonido mayor o menor."]
+    },
+    {
+      "id": "unpack-known-chord",
+      "title": "Diseccionar un acorde conocido",
+      "approximateDuration": "7 min",
+      "explanation": "Mira una forma de G mayor que ya conoces como un conjunto de funciones: 1, 3 y 5.",
+      "steps": [
+        {
+          "instructions": [
+            "Toca una forma de G mayor que ya conozcas.",
+            "Recorre las cuerdas individualmente e identifica las notas G, B y D.",
+            "Mientras las tocas, piensa en su función: 1, 3 o 5.",
+            "Repite con otra forma conocida de G mayor, en otra zona del mástil."
+          ],
+          "examples": [
+            { "label": "Fundamental", "value": "G → 1" },
+            { "label": "Tercera", "value": "B → 3" },
+            { "label": "Quinta", "value": "D → 5" }
+          ]
+        }
+      ],
+      "takeaway": "No hace falta memorizar todavía las posiciones. Date tiempo para pensar.",
+      "completion": ["Puedes identificar 1, 3 y 5 dentro de dos formas conocidas de G mayor, aunque necesites pensar."]
+    },
+    {
+      "id": "map-g",
+      "title": "El mapa de G",
+      "approximateDuration": "5 min",
+      "explanation": "Explora entre los trastes 0 y 12. El objetivo es conectar nota, posición y función dentro del acorde.",
+      "steps": [
+        {
+          "instructions": [
+            "Localiza todos los G que puedas. Piensa en ellos como la fundamental: 1.",
+            "Localiza varios B. Son la tercera: 3.",
+            "Localiza varios D. Son la quinta: 5."
+          ],
+          "examples": [{ "label": "La conexión que buscamos", "value": "nota ↔ posición ↔ función" }]
+        }
+      ],
+      "takeaway": "No busques velocidad ni memorizar hoy todo el diapasón. Razonar dónde está una nota también es practicar.",
+      "completion": ["Encuentras varias apariciones de 1, 3 y 5 sin consultar un diagrama, aunque tengas que razonar algunas."]
+    },
+    {
+      "id": "build-d-triads",
+      "title": "Construir D mayor y D menor",
+      "approximateDuration": "5 min",
+      "explanation": "Lleva la misma idea a una nueva fundamental. Intenta resolver cada pregunta antes de abrir la solución.",
+      "steps": [
+        {
+          "title": "Primero, D mayor",
+          "text": "Partiendo de D como fundamental, construye una tríada de D mayor utilizando 1–3–5. ¿Qué notas necesitas?",
+          "solution": {
+            "label": "Revelar D mayor",
+            "examples": [{ "label": "D mayor", "value": "D – F♯ – A", "detail": "1 – 3 – 5" }]
+          }
+        },
+        {
+          "title": "Después, D menor",
+          "text": "¿Qué habría que modificar para convertirlo en D menor?",
+          "solution": {
+            "label": "Revelar D menor",
+            "examples": [{ "label": "D menor", "value": "D – F – A", "detail": "1 – ♭3 – 5" }],
+            "text": "La tercera ha descendido un semitono: F♯ → F. F♯ es la tercera mayor de D; F es la tercera menor."
+          }
+        }
+      ],
+      "completion": ["Puedes identificar la tercera de cada tríada y explicar por qué una produce el sonido mayor y la otra el menor."]
+    },
+    {
+      "id": "play-music",
+      "title": "Aplicarlo a música",
+      "approximateDuration": "5–8 min",
+      "explanation": "Ahora, deja que las ideas acompañen a la música. Mantén el ritmo con las formas que te resulten naturales.",
+      "steps": [
+        {
+          "examples": [{ "label": "Tu progresión", "value": "G – C – Em – D" }]
+        },
+        {
+          "title": "Primera vuelta · La fundamental",
+          "instructions": [
+            "Toca la progresión con las formas de acordes que te resulten naturales.",
+            "Sé consciente únicamente de la fundamental de cada acorde: G → C → E → D.",
+            "No detengas el ritmo para analizar cada acorde."
+          ]
+        },
+        {
+          "title": "Segunda vuelta · Solo si estás a gusto",
+          "text": "Si la primera vuelta resulta cómoda, intenta localizar mentalmente alguna tercera dentro de los acordes mientras continúa la progresión."
+        }
+      ],
+      "takeaway": "No importa equivocarse. La prioridad sigue siendo tocar música.",
+      "completion": ["Mantienes la progresión mientras eres consciente, al menos parcialmente, de dónde está la fundamental de cada acorde."]
+    }
+  ],
+  "closing": {
+    "title": "Por hoy, ¿cómo ha ido?",
+    "statusHelp": "«Cómodo» describe cómo te has sentido en esta sesión; no significa que la habilidad esté dominada definitivamente.",
+    "noteQuestion": "¿Qué te costó o qué te llamó la atención?"
+  }
+}
