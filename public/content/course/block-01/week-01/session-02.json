@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "id": "block-01-week-01-session-02",
+  "title": "De la nota al intervalo",
+  "block": { "number": 1, "title": "Entender el mástil" },
+  "week": { "number": 1, "title": "Notas e intervalos" },
+  "number": 2,
+  "estimatedDuration": "30–35 min",
+  "objective": "Empezar a ver el mástil como distancias desde una fundamental: 1, ♭3, 3, 5 y 8, aunque todavía necesites calcular algunas.",
+  "introduction": {
+    "title": "La nota cambia; la relación permanece.",
+    "text": "Ya has construido tríadas con nombres de notas. Hoy vas a conectar tres cosas cada vez: la nota que buscas, la distancia desde la fundamental y el lugar físico donde la encuentras.",
+    "examples": [
+      { "label": "Desde cualquier fundamental", "value": "1 · ♭3 · 3 · 5 · 8" },
+      { "label": "La conexión de hoy", "value": "nota ↔ intervalo ↔ posición" }
+    ],
+    "takeaway": "No necesitas responder deprisa. Calcular, comprobar y volver a tocar también construye el mapa."
+  },
+  "resources": [],
+  "exercises": [
+    {
+      "id": "recall-triads",
+      "title": "Calentar construyendo tríadas",
+      "approximateDuration": "5 min",
+      "explanation": "Recupera 1–3–5 y 1–♭3–5 antes de llevar esas distancias al mástil. Intenta cada acorde antes de abrir la respuesta.",
+      "steps": [
+        {
+          "instructions": [
+            "Construye mentalmente A mayor y A menor.",
+            "Haz lo mismo con C mayor y C menor.",
+            "Termina con E mayor y E menor.",
+            "Di en voz baja qué nota cumple la función 1, 3 o ♭3 y 5."
+          ],
+          "solution": {
+            "label": "Revelar las seis tríadas",
+            "examples": [
+              { "label": "A mayor / menor", "value": "A–C♯–E / A–C–E", "detail": "1–3–5 / 1–♭3–5" },
+              { "label": "C mayor / menor", "value": "C–E–G / C–E♭–G", "detail": "1–3–5 / 1–♭3–5" },
+              { "label": "E mayor / menor", "value": "E–G♯–B / E–G–B", "detail": "1–3–5 / 1–♭3–5" }
+            ]
+          }
+        }
+      ],
+      "takeaway": "Si tienes que contar tonos o imaginar una escala, hazlo. Hoy buscamos respuestas correctas, no automáticas.",
+      "completion": ["Construyes correctamente varias de las tríadas usando 1–3–5 o 1–♭3–5, aunque todavía necesites pensar."]
+    },
+    {
+      "id": "root-distances-a",
+      "title": "Una fundamental, varias distancias",
+      "approximateDuration": "6 min",
+      "explanation": "Usa A como punto de partida cómodo y convierte cinco intervalos en movimientos reales sobre el instrumento.",
+      "steps": [
+        {
+          "instructions": [
+            "Elige un A que encuentres con facilidad en una cuerda grave y tócalo como fundamental: 1.",
+            "Busca cerca de él ♭3, 3, 5 y 8. Toca primero la fundamental y después cada destino.",
+            "Cada vez que llegues, di las tres piezas: nombre de nota, función y lugar físico.",
+            "Repite desde otro A. No intentes cubrir todo el mástil."
+          ],
+          "solution": {
+            "label": "Comprobar las notas desde A",
+            "examples": [
+              { "label": "Fundamental y octava", "value": "A → A", "detail": "1 → 8" },
+              { "label": "Terceras", "value": "C / C♯", "detail": "♭3 / 3" },
+              { "label": "Quinta", "value": "E", "detail": "5" }
+            ],
+            "text": "Comprueba las notas, pero conserva las posiciones que has encontrado tú. No necesitas memorizar un dibujo nuevo."
+          }
+        }
+      ],
+      "takeaway": "El intervalo describe una distancia desde la fundamental; la nota y la posición son dos maneras de localizar su destino.",
+      "completion": ["Desde al menos un A, localizas 1, ♭3, 3, 5 y 8 y puedes nombrar la relación que estás tocando."]
+    },
+    {
+      "id": "move-root-c",
+      "title": "Mover la fundamental",
+      "approximateDuration": "6 min",
+      "explanation": "Cambia el centro a C para comprobar que las funciones se transportan aunque cambien los nombres de las notas.",
+      "steps": [
+        {
+          "instructions": [
+            "Localiza un C cómodo y trátalo como 1.",
+            "Desde ahí, busca ♭3, 3, 5 y 8 con el mismo proceso que usaste desde A.",
+            "Toca C antes de cada nota para mantener clara la distancia.",
+            "Alterna una vez entre A y C: fundamental–tercera–quinta–octava. Observa qué cambia y qué permanece."
+          ],
+          "solution": {
+            "label": "Comprobar las notas desde C",
+            "examples": [
+              { "label": "Fundamental y octava", "value": "C → C", "detail": "1 → 8" },
+              { "label": "Terceras", "value": "E♭ / E", "detail": "♭3 / 3" },
+              { "label": "Quinta", "value": "G", "detail": "5" }
+            ]
+          }
+        }
+      ],
+      "takeaway": "A y C producen nombres distintos, pero 1, ♭3, 3, 5 y 8 mantienen la misma relación con su fundamental.",
+      "completion": ["Transportas las cinco funciones de A a C sin depender de una forma completa de acorde."]
+    },
+    {
+      "id": "interval-before-note",
+      "title": "Encontrar el intervalo antes que la nota",
+      "approximateDuration": "5 min",
+      "explanation": "Rompe por momentos la cadena «fundamental → calcular la nota → buscarla»: deja que la mano encuentre una distancia y nombra el resultado después.",
+      "steps": [
+        {
+          "title": "Desde A",
+          "instructions": [
+            "Toca A y encuentra físicamente su tercera mayor. Después nombra la nota.",
+            "Vuelve a A y encuentra su tercera menor, su quinta y su octava.",
+            "En dos de los intentos, evita calcular primero el nombre: piensa en la distancia y comprueba la nota al llegar."
+          ]
+        },
+        {
+          "title": "Ahora desde C",
+          "instructions": [
+            "Repite el recorrido con C como fundamental.",
+            "Si dudas, vuelve a calcular. Después repite el mismo movimiento una vez sin detenerte."
+          ]
+        }
+      ],
+      "takeaway": "Usar una relación física no prohíbe pensar en notas. Estás abriendo una segunda ruta para llegar al mismo lugar.",
+      "completion": ["Encuentras algunas terceras, quintas u octavas como distancia física antes de decir el nombre de la nota."]
+    },
+    {
+      "id": "play-intervals-in-progression",
+      "title": "Mantener los intervalos dentro de la música",
+      "approximateDuration": "8 min",
+      "explanation": "Vuelve a G–C–Em–D. Esta vez reconocerás algunas funciones mientras la progresión sigue sonando; no hace falta analizar cada nota.",
+      "steps": [
+        {
+          "examples": [{ "label": "Tu progresión", "value": "G – C – Em – D" }]
+        },
+        {
+          "title": "Primera vuelta · Música",
+          "instructions": [
+            "Toca la progresión con tu ritmo normal y con las formas que ya conoces.",
+            "No analices todavía: recupera primero el pulso y el sonido."
+          ]
+        },
+        {
+          "title": "Segunda vuelta · La fundamental",
+          "instructions": [
+            "Mientras mantienes el ritmo, sé consciente de una fundamental dentro de cada acorde.",
+            "Si la atención rompe el pulso, vuelve a tocar sin analizar y entra de nuevo en el siguiente acorde."
+          ]
+        },
+        {
+          "title": "Tercera vuelta · Una tercera o una quinta",
+          "text": "Elige solo dos acordes. En cada uno, reconoce o acentúa una tercera o una quinta que tengas localizada. Deja los otros acordes tranquilos."
+        }
+      ],
+      "takeaway": "La música sigue siendo la prioridad. Reconocer conscientemente unas pocas funciones ya es una aplicación real.",
+      "completion": ["Mantienes la progresión mientras reconoces conscientemente alguna fundamental, tercera o quinta sin detener la música por completo."]
+    }
+  ],
+  "closing": {
+    "title": "Por hoy, ¿cómo ha ido?",
+    "statusHelp": "«Cómodo» describe cómo te has sentido en esta sesión; no significa que la habilidad esté dominada definitivamente.",
+    "noteQuestion": "¿Qué distancia empezó a sentirse física y cuál tuviste que seguir calculando?"
+  }
+}

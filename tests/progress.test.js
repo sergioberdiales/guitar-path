@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { emptyProgress, loadProgress, normalizeProgress, saveProgress, storageKey } from '../src/progress.js';
 
 const session = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-01.json', import.meta.url), 'utf8'));
+const session2 = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-02.json', import.meta.url), 'utf8'));
+const session3 = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-03.json', import.meta.url), 'utf8'));
 
 function memoryStorage() {
   const values = new Map();
@@ -96,4 +98,21 @@ test('las sesiones guardan en claves distintas sin afectar otros datos del naveg
   saveProgress(session, progress, () => storage);
   assert.equal(loadProgress(otherSession, () => storage).progress.note, '');
   assert.equal(storage.getItem('other-app'), 'untouched');
+});
+
+test('las tres sesiones reales conservan progreso independiente', () => {
+  const storage = memoryStorage();
+  const progress1 = emptyProgress(session);
+  const progress2 = emptyProgress(session2);
+  const progress3 = emptyProgress(session3);
+  progress1.exercises[session.exercises[0].id] = 'comfortable';
+  progress2.exercises[session2.exercises[0].id] = 'practiced';
+  progress3.note = 'La tríada pequeña de D ya se ve clara.';
+  saveProgress(session, progress1, () => storage);
+  saveProgress(session2, progress2, () => storage);
+  saveProgress(session3, progress3, () => storage);
+
+  assert.deepEqual(loadProgress(session, () => storage).progress, progress1);
+  assert.deepEqual(loadProgress(session2, () => storage).progress, progress2);
+  assert.deepEqual(loadProgress(session3, () => storage).progress, progress3);
 });

@@ -1,8 +1,10 @@
 import './style.css';
+import { resolveSession, sessionHref } from './course.js';
 import { createProgressExport, exerciseStates, loadProgress, saveProgress } from './progress.js';
 
 const app = document.querySelector('#app');
-const sessionPath = `${import.meta.env.BASE_URL}content/course/block-01/week-01/session-01.json`;
+const weekPath = `${import.meta.env.BASE_URL}content/course/block-01/week-01/`;
+const coursePath = `${weekPath}index.json`;
 const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
@@ -76,7 +78,7 @@ function renderExercise(exercise, index, progress) {
   </article>`;
 }
 
-function renderSession(session, progress) {
+function renderSession(session, progress, sessions) {
   const firstPending = session.exercises.find(({ id }) => progress.exercises[id] === 'pending');
   const hasPractice = Object.values(progress.exercises).some((state) => state !== 'pending');
   return `
@@ -99,6 +101,10 @@ function renderSession(session, progress) {
       <main id="main" tabindex="-1">
         <section class="session-hero" aria-labelledby="session-title">
           <div class="session-kicker"><span class="session-tag">SESIÓN ${number(session.number)}</span><span>${escape(session.week.title)}</span></div>
+          <nav class="session-switcher" aria-label="Sesiones de la semana">
+            <span>Sesiones</span>
+            ${sessions.map((knownSession) => `<a href="${escape(sessionHref(knownSession.id, import.meta.env.BASE_URL))}" title="${escape(knownSession.title)}" ${knownSession.id === session.id ? 'aria-current="page"' : ''}>${number(knownSession.number)}</a>`).join('')}
+          </nav>
           <h1 id="session-title">${escape(session.title)}</h1>
           <p class="objective-label">Tu objetivo de hoy</p>
           <p class="objective">${escape(session.objective)}</p>
@@ -119,7 +125,7 @@ function renderSession(session, progress) {
           <p class="save-feedback" id="save-feedback" role="status">Se guarda automáticamente en este navegador.</p>
           <div class="export-progress">
             <button class="export-button" id="export-progress" type="button" aria-describedby="export-help">Exportar progreso</button>
-            <p class="field-help" id="export-help">Descarga una copia local para revisar tu progreso fuera de la aplicación o compartirlo con ChatGPT. El archivo incluye tu nota.</p>
+            <p class="field-help" id="export-help">Descarga una copia local para revisar tu progreso fuera de la aplicación o compartirlo con ChatGPT. El archivo incluye tus notas guardadas.</p>
             <p class="field-help" id="export-feedback" role="status"></p>
           </div>
         </section>
@@ -129,7 +135,7 @@ function renderSession(session, progress) {
     <div class="storage-warning" id="storage-warning" role="alert" hidden></div>`;
 }
 
-function wireProgress(session, progress) {
+function wireProgress(session, progress, sessions) {
   const feedback = document.querySelector('#save-feedback');
   const warning = document.querySelector('#storage-warning');
   const persist = () => {
@@ -184,7 +190,7 @@ function wireProgress(session, progress) {
   document.querySelector('#export-progress').addEventListener('click', () => {
     const exportFeedback = document.querySelector('#export-feedback');
     try {
-      const data = createProgressExport([session]);
+      const data = createProgressExport(sessions);
       const blob = new Blob([JSON.stringify(data, null, 2) + '\n'], { type: 'application/json;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -210,13 +216,23 @@ function wireProgress(session, progress) {
 
 async function start() {
   try {
-    const response = await fetch(sessionPath);
-    if (!response.ok) throw new Error(`Session request failed: ${response.status}`);
-    const session = await response.json();
+    const catalogResponse = await fetch(coursePath);
+    if (!catalogResponse.ok) throw new Error(`Course request failed: ${catalogResponse.status}`);
+    const catalog = await catalogResponse.json();
+    if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.sessions) || !catalog.sessions.length) {
+      throw new Error('Invalid course catalog');
+    }
+    const sessions = await Promise.all(catalog.sessions.map(async (filename) => {
+      const response = await fetch(`${weekPath}${filename}`);
+      if (!response.ok) throw new Error(`Session request failed: ${response.status}`);
+      return response.json();
+    }));
+    const session = resolveSession(sessions, window.location.search);
+    if (!session) throw new Error('Course has no sessions');
     const { progress, error } = loadProgress(session);
-    app.innerHTML = renderSession(session, progress);
+    app.innerHTML = renderSession(session, progress, sessions);
     document.title = `${session.title} · Guitar Path`;
-    wireProgress(session, progress);
+    wireProgress(session, progress, sessions);
     if (error) {
       const warning = document.querySelector('#storage-warning');
       warning.hidden = false;

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "sessions": [
+    "session-01.json",
+    "session-02.json",
+    "session-03.json"
+  ]
+}

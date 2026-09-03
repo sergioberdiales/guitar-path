@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { createProgressExport, emptyProgress, storageKey } from '../src/progress.js';
 
 const session = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-01.json', import.meta.url), 'utf8'));
+const session2 = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-02.json', import.meta.url), 'utf8'));
+const session3 = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-03.json', import.meta.url), 'utf8'));
 const exportedAt = new Date('2026-08-31T14:00:00.000Z');
 
 function readOnlyStorage(entries = []) {
@@ -54,6 +56,31 @@ test('conserva el ID estable y los metadatos de sesión, bloque y semana', () =>
     week: { number: 1, title: 'Notas e intervalos' },
     sessionNumber: 1,
   });
+});
+
+test('incluye en orden el progreso guardado de varias sesiones conocidas', () => {
+  const progress1 = savedProgress();
+  const progress2 = emptyProgress(session2);
+  const progress3 = emptyProgress(session3);
+  progress2.exercises['root-distances-a'] = 'practiced';
+  progress2.actualDuration = 34;
+  progress3.exercises['find-small-d-triad'] = 'comfortable';
+  progress3.note = 'D 2–3–2\nE 4–5–4';
+  const { getStorage, reads } = readOnlyStorage([
+    [storageKey(session.id), JSON.stringify(progress1)],
+    [storageKey(session2.id), JSON.stringify(progress2)],
+    [storageKey(session3.id), JSON.stringify(progress3)],
+    ['other-app', 'private'],
+  ]);
+
+  const data = createProgressExport([session, session2, session3], getStorage, exportedAt);
+  assert.deepEqual(data.sessions.map(({ sessionId }) => sessionId), [session.id, session2.id, session3.id]);
+  assert.deepEqual(reads, [storageKey(session.id), storageKey(session2.id), storageKey(session3.id)]);
+  assert.equal(data.sessions[1].title, 'De la nota al intervalo');
+  assert.equal(data.sessions[1].progress.actualDuration, 34);
+  assert.equal(data.sessions[2].title, 'Ver tríadas dentro del mástil');
+  assert.equal(data.sessions[2].progress.note, progress3.note);
+  assert.doesNotMatch(JSON.stringify(data), /private/);
 });
 
 test('conserva los tres estados, duración y nota del registro guardado', () => {

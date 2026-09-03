@@ -4,11 +4,11 @@
 
 Sitio estático con Vite, HTML, CSS y JavaScript vanilla. Vite es la única dependencia directa y solo interviene en desarrollo y build. No hay framework, router, fuentes remotas, backend ni base de datos.
 
-`src/main.js` carga una sesión JSON mediante `fetch`, representa su contenido y conecta los controles. La ruta usa `import.meta.env.BASE_URL`; `base: '/guitar-path/'` corresponde al subdirectorio del repositorio en GitHub Pages. El texto del JSON y las notas se escapan antes de insertarse en HTML. Los recursos externos solo admiten HTTP/HTTPS y se abren con `noopener noreferrer`.
+`src/main.js` carga el catálogo de la semana y sus sesiones JSON mediante `fetch`, representa la sesión seleccionada y conecta los controles. Las rutas usan `import.meta.env.BASE_URL`; `base: '/guitar-path/'` corresponde al subdirectorio del repositorio en GitHub Pages. El texto del JSON y las notas se escapan antes de insertarse en HTML. Los recursos externos solo admiten HTTP/HTTPS y se abren con `noopener noreferrer`.
 
 ## Contenido
 
-La única sesión está en `public/content/course/block-01/week-01/session-01.json`. No incluye progreso del usuario.
+Las sesiones están en `public/content/course/block-01/week-01/session-01.json`, `session-02.json` y `session-03.json`. Ninguna incluye progreso del usuario. `index.json` es un catálogo mínimo: conserva el orden y enumera los nombres de fichero que debe cargar la aplicación. Añadir una sesión exige crear su JSON y añadirlo a este catálogo.
 
 | Campo | Contenido |
 | --- | --- |
@@ -24,7 +24,7 @@ Cada ejercicio contiene `id`, `title`, `approximateDuration`, `explanation`, `st
 
 Los bloques opcionales se omiten. El resto de campos utilizados por la sesión son obligatorios. Un fallo al cargar o representar el contenido muestra una pantalla de reintento sin tocar el progreso. No se incorpora un motor de esquemas ni CMS; los tests validan el contrato básico del contenido actual.
 
-Para añadir una sesión después, se puede reutilizar este formato y el mismo renderizador. La selección/ruta de nuevas sesiones queda pendiente de definir; no se crea aún un catálogo. Mantener los IDs al corregir contenido permite conservar los estados existentes.
+El mismo renderizador sirve las tres sesiones. `src/course.js` resuelve la sesión seleccionada a partir de `?session=<id-estable>` y construye sus enlaces. La URL sin parámetros sigue abriendo la Sesión 1; una selección desconocida también vuelve a ella. Esta navegación usa enlaces estáticos y parámetros de consulta, por lo que no necesita router ni reglas de reescritura en GitHub Pages. Mantener los IDs al corregir contenido permite conservar los estados existentes.
 
 ## Progreso local
 
@@ -46,7 +46,7 @@ No se guardan aperturas de soluciones, posición de scroll ni historial de sesio
 
 ## Exportación del progreso
 
-La acción **Exportar progreso** aparece de forma secundaria en el cierre. `createProgressExport` en `src/progress.js` recibe los metadatos de las sesiones conocidas y lee sus claves de progreso en `localStorage` en el momento de exportar. Actualmente se pasa únicamente la Sesión 1. No enumera el almacenamiento ni recoge claves ajenas, sesiones desconocidas o preferencias del navegador.
+La acción **Exportar progreso** aparece de forma secundaria en el cierre. `createProgressExport` en `src/progress.js` recibe los metadatos de las sesiones conocidas y lee sus claves de progreso en `localStorage` en el momento de exportar. La interfaz le pasa las tres sesiones cargadas desde el catálogo. No enumera el almacenamiento ni recoge claves ajenas, sesiones desconocidas o preferencias del navegador.
 
 El formato de intercambio tiene su propia versión y conserva los IDs estables:
 
@@ -94,6 +94,6 @@ La opción **Settings → Pages → Source** debe ser **GitHub Actions**. El REA
 
 ## Antes del siguiente incremento
 
-- Probar esta sesión con la guitarra y ajustar contenido, tamaño de texto y cantidad de scroll.
-- Definir cómo seleccionar la siguiente sesión antes de añadir navegación de curso.
+- Probar las tres sesiones con la guitarra y ajustar el contenido a partir del uso real.
 - Decidir si bastará un estado por sesión o harán falta intentos separados; hoy los cambios sustituyen el mismo registro.
+- Mantener fuera de alcance la importación y cualquier catálogo amplio de posiciones hasta que exista evidencia de uso.
