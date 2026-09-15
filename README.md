@@ -25,6 +25,7 @@ Abre la dirección local que imprime Vite, normalmente `http://localhost:5173/gu
 
 - Elige una sesión con los enlaces numerados situados antes del título. Sigue sus cinco ejercicios en orden; en escritorio también hay un índice lateral.
 - Los vídeos son opcionales y se abren en otra pestaña; no se cargan reproductores externos.
+- **Recursos**, en la cabecera de cualquier sesión (también en móvil), lleva a las herramientas comunes del curso: ejercicios de oído de musictheory.net y una guía para empezar con terceras menores y mayores. Los enlaces se abren en otra pestaña. El catálogo se edita en `public/content/resources.json`.
 - Revela por separado D mayor y D menor después de intentar construirlos.
 - Marca cada ejercicio como Pendiente, Practicado o Cómodo. Puedes cambiarlo también en el cierre.
 - Registra los minutos aproximados y, si quieres, una nota. Todo se guarda automáticamente.

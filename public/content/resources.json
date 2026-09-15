@@ -1,0 +1,33 @@
+{
+  "title": "Recursos del curso",
+  "description": "Herramientas complementarias para practicar a tu ritmo, desde cualquier sesión. Los enlaces se abren en otra pestaña.",
+  "items": [
+    {
+      "id": "musictheory-ear-interval",
+      "type": "Web interactiva",
+      "title": "Reconocer intervalos de oído",
+      "author": "musictheory.net · En inglés",
+      "url": "https://www.musictheory.net/exercises/ear-interval",
+      "purpose": "Escucha dos notas e identifica la distancia entre ellas. Utiliza el engranaje para elegir los intervalos que quieres practicar: puedes empezar solo con tercera menor y tercera mayor.",
+      "required": false
+    },
+    {
+      "id": "musictheory-ear-note",
+      "type": "Web interactiva",
+      "title": "Reconocer notas de oído",
+      "author": "musictheory.net · En inglés",
+      "url": "https://www.musictheory.net/exercises/ear-note",
+      "purpose": "Escucha e identifica una nota. Para trabajar el oído relativo, escucha primero el Do de referencia y compara la nota con él. No necesitas reconocer notas sin una referencia.",
+      "required": false
+    }
+  ],
+  "guide": {
+    "title": "Para empezar: tercera menor y tercera mayor",
+    "steps": [
+      "En el ejercicio de intervalos, abre el engranaje y busca Intervals. Deja activadas Minor 3rd (tercera menor, 3 semitonos) y Major 3rd (tercera mayor, 4 semitonos).",
+      "Compara en la quinta cuerda de la guitarra: al aire → traste 3 es La–Do, tercera menor; al aire → traste 4 es La–Do♯, tercera mayor. Alterna ambas desde el mismo La e intenta cantarlas.",
+      "Vuelve al ejercicio para reconocer la distancia desde distintas notas de partida. Cuando falles, escucha de nuevo antes de pasar a la siguiente pregunta. Practica unos 5–10 minutos sin perseguir la puntuación.",
+      "Cuando distingas ambas con soltura, añade Perfect 5th (quinta justa) y Octave (octava). Amplía las opciones poco a poco."
+    ]
+  }
+}
