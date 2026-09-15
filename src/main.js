@@ -78,13 +78,13 @@ function renderExercise(exercise, index, progress) {
   </article>`;
 }
 
-function renderSession(session, progress, sessions) {
+function renderSession(session, progress, sessions, resources) {
   const firstPending = session.exercises.find(({ id }) => progress.exercises[id] === 'pending');
   const hasPractice = Object.values(progress.exercises).some((state) => state !== 'pending');
   return `
     <header class="site-header">
       <a class="brand" href="#main" aria-label="Guitar Path, inicio de la sesión"><img src="${import.meta.env.BASE_URL}favicon.svg" width="36" height="36" alt="">Guitar<span>Path</span></a>
-      <span class="header-caption">UN POCO CADA DÍA. MÁS MÚSICA.</span>
+      <nav class="course-links" aria-label="Recursos del curso"><a href="#course-resources">Recursos</a></nav>
       <span class="local-label"><span aria-hidden="true" class="local-dot"></span>Tu espacio de práctica</span>
     </header>
     <div class="page-layout">
@@ -128,6 +128,17 @@ function renderSession(session, progress, sessions) {
             <p class="field-help" id="export-help">Descarga una copia local para revisar tu progreso fuera de la aplicación o compartirlo con ChatGPT. El archivo incluye tus notas guardadas.</p>
             <p class="field-help" id="export-feedback" role="status"></p>
           </div>
+        </section>
+        <section class="course-resources" id="course-resources" aria-labelledby="resources-title">
+          <p class="eyebrow">Para seguir practicando</p>
+          <h2 id="resources-title">${escape(resources.title)}</h2>
+          <p class="resources-intro">${escape(resources.description)}</p>
+          <div class="resource-grid">${resources.items.map(renderResource).join('')}</div>
+          <aside class="resource-guide" aria-labelledby="resource-guide-title">
+            <h3 id="resource-guide-title">${escape(resources.guide.title)}</h3>
+            <ol class="instructions">${resources.guide.steps.map((step) => `<li>${escape(step)}</li>`).join('')}</ol>
+          </aside>
+          <a class="resources-return" href="#main">Volver a la sesión ↑</a>
         </section>
         <footer class="page-footer"><span>Guitar Path <span aria-hidden="true">/</span> Menos pantalla, más guitarra.</span><a href="#main">Volver arriba ↑</a></footer>
       </main>
@@ -229,8 +240,11 @@ async function start() {
     }));
     const session = resolveSession(sessions, window.location.search);
     if (!session) throw new Error('Course has no sessions');
+    const resourcesResponse = await fetch(`${import.meta.env.BASE_URL}content/resources.json`);
+    if (!resourcesResponse.ok) throw new Error(`Resources request failed: ${resourcesResponse.status}`);
+    const resources = await resourcesResponse.json();
     const { progress, error } = loadProgress(session);
-    app.innerHTML = renderSession(session, progress, sessions);
+    app.innerHTML = renderSession(session, progress, sessions, resources);
     document.title = `${session.title} · Guitar Path`;
     wireProgress(session, progress, sessions);
     if (error) {
