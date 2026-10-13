@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "block-01-week-01-session-04",
+  "title": "Las tríadas empiezan a convertirse en música",
+  "block": { "number": 1, "title": "Entender el mástil" },
+  "week": { "number": 1, "title": "Notas e intervalos" },
+  "number": 4,
+  "estimatedDuration": "28–30 min",
+  "objective": "Reconocer y tocar tríadas de D, C y G en las tres cuerdas agudas y utilizarlas en el acompañamiento de Sweet Child O' Mine.",
+  "introduction": {
+    "title": "Tres notas, un acompañamiento real.",
+    "text": "Vamos a completar el grupo D, C y G y ponerlo al servicio de una canción. En afinación estándar, cada traste suma un semitono: la quinta justa está a siete semitonos de la fundamental tanto en la tríada mayor como en la menor.",
+    "examples": [
+      { "label": "Mayor · 1–3–5", "value": "0 · 4 · 7 semitonos" },
+      { "label": "Menor · 1–♭3–5", "value": "0 · 3 · 7 semitonos" }
+    ],
+    "takeaway": "Puedes repartir esta sesión entre varios días. Al retomarla, repasa un cambio y continúa; en el cierre anota la suma aproximada de minutos y dónde te quedaste."
+  },
+  "resources": [
+    {
+      "id": "justin-sweet-child-easy",
+      "type": "video",
+      "title": "How to play Sweet Child O Mine by Guns N Roses | Easy Guitar #JGTRSweetChild",
+      "author": "JustinGuitar Songs",
+      "youtubeId": "UDXEciRSGm8",
+      "approximateDuration": null,
+      "purpose": "Apoyo opcional para el acompañamiento sencillo de la canción. Consulta solo el fragmento que necesites para reconocer los cambios; después adapta el acompañamiento a las tríadas de esta sesión.",
+      "required": false,
+      "label": "Acompañamiento de referencia"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "locate-d-c-g-triads",
+      "title": "Localizar D, C y G",
+      "approximateDuration": "5 min",
+      "explanation": "Trabaja en afinación estándar E–A–D–G–B–e. Los tres números indican los trastes en las cuerdas G–B–e, de la tercera a la primera; toca solo esas cuerdas.",
+      "steps": [
+        {
+          "examples": [
+            { "label": "D · G–B–e", "value": "2–3–2", "detail": "A–D–F♯ · 5–1–3" },
+            { "label": "C · G–B–e", "value": "5–5–3", "detail": "C–E–G · 1–3–5" },
+            { "label": "G · G–B–e", "value": "4–3–3", "detail": "B–D–G · 3–5–1" }
+          ],
+          "instructions": [
+            "Recupera D 2–3–2 de la sesión anterior. Toca sus tres notas por separado y después juntas.",
+            "Haz lo mismo con C 5–5–3 y G 4–3–3.",
+            "En cada forma, señala primero la fundamental; después la tercera y la quinta. La nota más grave no siempre es la fundamental.",
+            "Comprueba sin prisa los nombres y funciones con la referencia."
+          ]
+        }
+      ],
+      "completion": ["Tocas las tres tríadas y señalas 1, 3 y 5 en cada una, aunque todavía consultes la referencia."]
+    },
+    {
+      "id": "pulse-d-c-g-d",
+      "title": "Cambiar sin perder el pulso",
+      "approximateDuration": "8 min",
+      "explanation": "Construye un bucle de práctica en 4/4: D–C–G–D, un compás de cuatro pulsos por acorde. Es un patrón reducido para preparar los cambios.",
+      "steps": [
+        {
+          "examples": [{ "label": "Bucle de práctica", "value": "D – C – G – D", "detail": "4 pulsos por acorde" }],
+          "instructions": [
+            "Cuenta 1–2–3–4 a un tempo cómodo y toca una tríada solo en el 1 de cada compás.",
+            "Usa el resto del compás para preparar el siguiente cambio, manteniendo la cuenta.",
+            "Practica por separado D→C y C→G si alguno te frena. Después vuelve al bucle.",
+            "Cuando puedas mantenerlo, añade un rasgueo suave en cada pulso. No subas el tempo todavía."
+          ]
+        }
+      ],
+      "takeaway": "La continuidad importa más que la velocidad. Si un cambio falla, entra en el siguiente 1 y sigue.",
+      "completion": ["Completas dos vueltas del bucle con cambios reconocibles y una cuenta regular, aunque necesites un rasgueo por compás."]
+    },
+    {
+      "id": "sweet-child-full-and-triads",
+      "title": "Sweet Child O' Mine: dos acompañamientos",
+      "approximateDuration": "10 min",
+      "explanation": "Usa el recorrido D–C–G–D de la introducción y estrofa como base para tu propio acompañamiento. Las tríadas sustituyen los acordes; no intentan reproducir el riff de Slash.",
+      "steps": [
+        {
+          "title": "Escucha y prepara",
+          "text": "Si necesitas situarte en la canción, consulta brevemente el vídeo enlazado en «Un poco de contexto». Para un acompañamiento más cercano a esa sección, mantén cada acorde dos compases de 4/4: ocho pulsos. El bucle de cuatro pulsos del ejercicio anterior era una reducción."
+        },
+        {
+          "title": "Alterna el tamaño del acorde",
+          "instructions": [
+            "Toca D–C–G–D con acordes completos y un patrón que ya puedas mantener.",
+            "Repite a igual tempo y duración, sustituyendo los cuatro acordes por las tríadas de G–B–e.",
+            "Haz una tercera vuelta mezclando ambos: acordes completos para dar cuerpo y tríadas para dejar espacio.",
+            "Escucha qué cambia en registro y densidad. Elige una combinación que te guste y repítela."
+          ]
+        },
+        {
+          "title": "La afinación de la grabación",
+          "text": "La grabación original utiliza todas las cuerdas un semitono más bajas: E♭–A♭–D♭–G♭–B♭–e♭. Aquí las posiciones y los nombres de notas se calculan en afinación estándar. Toca por tu cuenta; para tocar encima del original necesitarías bajar las seis cuerdas o subir un semitono el audio. Con las cuerdas bajadas, las mismas formas de D, C y G suenan D♭, B y G♭. Vuelve a afinación estándar antes de la siguiente sesión."
+        }
+      ],
+      "completion": ["Alternas acordes completos y tríadas durante el mismo recorrido sin cambiar voluntariamente el tempo y puedes describir una diferencia sonora."]
+    },
+    {
+      "id": "d-c-g-from-memory",
+      "title": "Tres vueltas sin consultar",
+      "approximateDuration": "5–7 min",
+      "explanation": "Pon a prueba el acompañamiento sin mirar las posiciones en pantalla. Mantén la guitarra a la vista si la necesitas.",
+      "steps": [
+        {
+          "instructions": [
+            "Aparta la referencia y toca D–C–G–D a tu tempo cómodo. Puedes empezar con cuatro pulsos por acorde.",
+            "Busca tres vueltas seguidas con notas claras y sin detener el pulso. Si aparece un fallo, practica ese cambio y vuelve a intentarlo.",
+            "Después de las vueltas, toca y nombra las fundamentales: D en B/3, C en G/5 y G en e/3.",
+            "Si no llegas hoy al criterio, marca Practicado y retoma este ejercicio otro día."
+          ]
+        }
+      ],
+      "completion": ["Completas tres vueltas limpias sin consultar las posiciones y reconoces la fundamental de D, C y G. No necesitas nombrarlas mientras tocas."]
+    }
+  ],
+  "closing": {
+    "title": "Por hoy, ¿cómo ha ido?",
+    "statusHelp": "«Cómodo» describe tu percepción de esta sesión, no un dominio definitivo. Puedes continuar otro día y actualizar los mismos estados.",
+    "noteQuestion": "¿Qué cambio te frenó y qué combinación de acordes completos y tríadas te gustó? Si practicaste varios días, suma sus minutos."
+  }
+}

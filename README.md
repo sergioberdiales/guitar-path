@@ -2,11 +2,14 @@
 
 Aplicación web para acompañar un curso estructurado de guitarra y registrar el progreso del alumno.
 
-La aplicación incluye las tres primeras sesiones de **Bloque 1 → Semana 1: Notas e intervalos**:
+La aplicación incluye las seis primeras sesiones de **Bloque 1 → Semana 1: Notas e intervalos**:
 
 1. Del acorde conocido a 1–3–5.
 2. De la nota al intervalo.
 3. Ver tríadas dentro del mástil.
+4. Las tríadas empiezan a convertirse en música.
+5. Wish You Were Here: guitarra y voz.
+6. De la tríada al fraseo.
 
 No hay cuentas, backend ni sincronización.
 
@@ -19,15 +22,16 @@ npm ci
 npm run dev
 ```
 
-Abre la dirección local que imprime Vite, normalmente `http://localhost:5173/guitar-path/`. La Sesión 1 se carga directamente y el selector numerado permite cambiar entre las tres sin pantallas intermedias.
+Abre la dirección local que imprime Vite, normalmente `http://localhost:5173/guitar-path/`. La Sesión 1 se carga directamente y el selector numerado permite cambiar entre las seis sin pantallas intermedias.
 
 ## Practicar
 
-- Elige una sesión con los enlaces numerados situados antes del título. Sigue sus cinco ejercicios en orden; en escritorio también hay un índice lateral.
+- Elige una sesión con los enlaces numerados situados antes del título. Sigue sus ejercicios en orden: cinco en las sesiones 1–3 y cuatro en las sesiones 4–6. En escritorio también hay un índice lateral.
 - Los vídeos son opcionales y se abren en otra pestaña; no se cargan reproductores externos.
 - Revela por separado D mayor y D menor después de intentar construirlos.
 - Marca cada ejercicio como Pendiente, Practicado o Cómodo. Puedes cambiarlo también en el cierre.
 - Registra los minutos aproximados y, si quieres, una nota. Todo se guarda automáticamente.
+- Puedes repartir una sesión entre varios días: actualiza la duración con la suma aproximada y utiliza la nota para recordar dónde te quedaste. Se conserva el mismo registro por sesión.
 - En el cierre, pulsa **Exportar progreso** para descargar una copia JSON del progreso guardado, con el contexto de todas las sesiones que hayas guardado. Puedes compartirla con ChatGPT para revisarla; incluye tus notas, así que revísalas antes de compartirla.
 
 El progreso se recupera al volver desde el mismo navegador y origen. «Cómodo» es una percepción de esta sesión, no una certificación de dominio. Borrar los datos del navegador elimina el progreso; los modos privados o el almacenamiento bloqueado pueden impedir conservarlo. Un cambio de dominio, protocolo o puerto también cambia el almacenamiento disponible. No se guarda un historial de intentos.
@@ -42,7 +46,7 @@ npm run build
 npm run preview
 ```
 
-Los tests usan el runner de Node, sin dependencias adicionales. Cubren el catálogo y la navegación, el contrato de las tres sesiones, persistencia independiente, datos corruptos, estados inválidos, errores de almacenamiento y la exportación conjunta sin modificar el almacenamiento ni incluir claves ajenas.
+Los tests usan el runner de Node, sin dependencias adicionales. Cubren el catálogo y la navegación, el contrato de las seis sesiones, posiciones y funciones musicales, persistencia independiente, datos corruptos, estados inválidos, errores de almacenamiento y la exportación conjunta sin modificar el almacenamiento ni incluir claves ajenas.
 
 Para una comprobación manual: cambia estados desde un ejercicio y desde el cierre; introduce duración y nota; recarga o cierra y vuelve a abrir; comprueba que los valores permanecen y que las soluciones vuelven a estar ocultas. Prueba también una pantalla de 375 px y navegación con teclado.
 
@@ -63,6 +67,8 @@ vite.config.js                                          Base /guitar-path/
 ```
 
 Consulta `docs/architecture.md` para el esquema del contenido y las decisiones del incremento.
+
+Las sesiones 4–6 utilizan Sweet Child O' Mine y Wish You Were Here en los ejercicios. Se practican en afinación estándar; el contenido distingue las reducciones de práctica del acompañamiento de las grabaciones. El vídeo de Wish You Were Here se limita al nivel 1 de la introducción instrumental; la voz se trabaja con una frase de la grabación de la canción que uses habitualmente. Consulta `docs/sessions-04-06.md` para las comprobaciones y ajustes pedagógicos.
 
 ## GitHub Pages
 

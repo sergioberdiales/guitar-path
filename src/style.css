@@ -62,7 +62,7 @@ main:focus { outline: none; }
 .session-hero { padding: 54px 0 40px; }
 .session-kicker { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: 12px; }
 .session-tag { display: inline-block; font-size: 10px; letter-spacing: 1.5px; padding: 7px 10px; border: 1px solid #cbd4c3; border-radius: 4px; color: var(--green); background: #edf0e6; font-weight: 600; }
-.session-switcher { display: flex; align-items: center; gap: 6px; margin-top: 15px; color: var(--muted); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.session-switcher { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 15px; color: var(--muted); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
 .session-switcher > span { margin-right: 3px; }
 .session-switcher a { display: grid; place-items: center; width: 34px; min-height: 34px; border: 1px solid var(--border); border-radius: 50%; text-decoration: none; font-family: ui-monospace, monospace; letter-spacing: 0; }
 .session-switcher a:hover { border-color: #9ba891; background: #edf0e6; }

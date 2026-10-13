@@ -7,14 +7,17 @@ const catalog = JSON.parse(readFileSync(new URL(`${contentRoot}index.json`, impo
 const sessions = catalog.sessions.map((filename) => JSON.parse(readFileSync(new URL(`${contentRoot}${filename}`, import.meta.url), 'utf8')));
 const [session, session2, session3] = sessions;
 
-test('el catálogo declara las tres sesiones en orden y todas cumplen el contrato de contenido', () => {
+test('el catálogo declara las seis sesiones en orden y todas cumplen el contrato de contenido', () => {
   assert.equal(catalog.schemaVersion, 1);
-  assert.deepEqual(catalog.sessions, ['session-01.json', 'session-02.json', 'session-03.json']);
-  assert.deepEqual(sessions.map(({ number }) => number), [1, 2, 3]);
+  assert.deepEqual(catalog.sessions, ['session-01.json', 'session-02.json', 'session-03.json', 'session-04.json', 'session-05.json', 'session-06.json']);
+  assert.deepEqual(sessions.map(({ number }) => number), [1, 2, 3, 4, 5, 6]);
   assert.deepEqual(sessions.map(({ id }) => id), [
     'block-01-week-01-session-01',
     'block-01-week-01-session-02',
     'block-01-week-01-session-03',
+    'block-01-week-01-session-04',
+    'block-01-week-01-session-05',
+    'block-01-week-01-session-06',
   ]);
 
   const allIds = [];
@@ -22,11 +25,11 @@ test('el catálogo declara las tres sesiones en orden y todas cumplen el contrat
     assert.equal(knownSession.schemaVersion, 1);
     assert.deepEqual(knownSession.block, { number: 1, title: 'Entender el mástil' });
     assert.deepEqual(knownSession.week, { number: 1, title: 'Notas e intervalos' });
-    assert.match(knownSession.estimatedDuration, /^\d+–\d+ min$/);
+    assert.match(knownSession.estimatedDuration, /^\d+(?:–\d+)? min$/);
     assert.ok(knownSession.objective);
     assert.ok(knownSession.introduction.text);
     assert.ok(Array.isArray(knownSession.resources));
-    assert.equal(knownSession.exercises.length, 5);
+    assert.equal(knownSession.exercises.length, knownSession.number <= 3 ? 5 : 4);
     assert.ok(knownSession.closing.noteQuestion);
     assert.ok(knownSession.closing.statusHelp);
     for (const exercise of knownSession.exercises) {

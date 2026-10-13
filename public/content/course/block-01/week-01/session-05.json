@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "id": "block-01-week-01-session-05",
+  "title": "Wish You Were Here: guitarra y voz",
+  "block": { "number": 1, "title": "Entender el mástil" },
+  "week": { "number": 1, "title": "Notas e intervalos" },
+  "number": 5,
+  "estimatedDuration": "27–30 min",
+  "objective": "Trabajar el oído, un acompañamiento sencillo y la coordinación entre guitarra y voz con una frase corta de Wish You Were Here.",
+  "introduction": {
+    "title": "Una frase es suficiente para empezar.",
+    "text": "Escucha primero, tararea después y añade la guitarra por etapas. Mantén la afinación estándar E–A–D–G–B–e. El trabajo de hoy se centra en una frase vocal, sin exigir interpretar toda la canción.",
+    "examples": [{ "label": "La secuencia de trabajo", "value": "escuchar → tararear → acompañar → cantar" }],
+    "takeaway": "Puedes repartir los ejercicios entre varios días. Al volver, recupera tu frase sin guitarra; registra los minutos acumulados y la dificultad concreta en el cierre."
+  },
+  "resources": [
+    {
+      "id": "justin-wish-level-one",
+      "type": "video",
+      "title": "5 levels of Wish You Were Here on guitar",
+      "author": "JustinGuitar Songs",
+      "youtubeId": "sG_K8sGflBY",
+      "approximateDuration": "00:59–12:50 · nivel 1",
+      "purpose": "Consulta opcional de la introducción instrumental: solo el nivel 1, desde 00:59 hasta antes de 12:51. No es una lección de canto ni de la sección vocal C–D–Am–G; para los ejercicios de voz escucha la grabación de la canción que uses habitualmente. No necesitas ver el bloque completo hoy.",
+      "required": false,
+      "label": "Solo nivel 1 · introducción"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "wish-active-listening",
+      "title": "Escuchar con una tarea",
+      "approximateDuration": "5 min",
+      "explanation": "Escucha una sección cantada de la grabación de Wish You Were Here que uses habitualmente. El nivel 1 del vídeo complementario trabaja la introducción instrumental, no esta frase vocal.",
+      "steps": [
+        {
+          "instructions": [
+            "Busca el comienzo de una sección cantada sobre C–D–Am–G, después de la introducción instrumental.",
+            "Escucha primero el acompañamiento y marca el pulso con el pie.",
+            "Vuelve al mismo fragmento atendiendo a la melodía: dónde entra, cuánto dura y dónde deja una pausa.",
+            "Elige una frase corta del comienzo, sobre C y D, y conserva ese mismo fragmento durante toda la sesión."
+          ]
+        }
+      ],
+      "completion": ["Distingues acompañamiento, melodía y al menos una pausa, y tienes elegida una frase breve para practicar."]
+    },
+    {
+      "id": "wish-simple-accompaniment",
+      "title": "Un acompañamiento que puedas sostener",
+      "approximateDuration": "7 min",
+      "explanation": "Aísla los cambios C–D–Am–G. Toca cuatro pulsos por acorde en un bucle de preparación; esta reducción no fija todavía dónde debe caer la frase vocal.",
+      "steps": [
+        {
+          "examples": [{ "label": "Bucle de preparación", "value": "C – D – Am – G", "detail": "4 pulsos por acorde · sin voz" }],
+          "instructions": [
+            "Usa las formas abiertas de C, D, Am y G que ya conoces.",
+            "Cuenta 1–2–3–4 y comienza con un único rasgueo hacia abajo en el 1.",
+            "Repite el bucle. Si resulta cómodo, toca un rasgueo hacia abajo en cada pulso.",
+            "Mantén el patrón más sencillo que puedas repetir sin tener que vigilar cada golpe."
+          ]
+        }
+      ],
+      "completion": ["Completas dos vueltas de C–D–Am–G con cuatro pulsos por acorde y un patrón regular."]
+    },
+    {
+      "id": "wish-hum-then-play",
+      "title": "De escuchar a cantar con guitarra",
+      "approximateDuration": "10 min",
+      "explanation": "Trabaja la frase elegida, en lugar de añadir de golpe toda la letra y todo el acompañamiento. Cantar la melodía y mantener la guitarra son dos tareas que puedes practicar por separado.",
+      "steps": [
+        {
+          "title": "Oído y voz solos",
+          "instructions": [
+            "Escucha tu frase corta y tararéala con la grabación.",
+            "Pausa la grabación y repítela sin guitarra. Comprueba después la primera nota y el contorno de la melodía.",
+            "Usa una octava cómoda para tu voz; no fuerces el registro de la grabación."
+          ]
+        },
+        {
+          "title": "Añade el acompañamiento por etapas",
+          "instructions": [
+            "Toca solo los acordes de esa frase, C y D, siguiendo los cambios y la duración que escuchaste en la grabación. No fuerces la melodía dentro del bucle de cuatro pulsos.",
+            "Tararea mientras das un único rasgueo en cada cambio de acorde. Conserva el pulso con el pie.",
+            "Cuando coincidan voz y cambios, prueba el patrón sencillo del ejercicio anterior, adaptado a la duración de la frase.",
+            "Finalmente intenta cantar esa frase con las palabras que ya conoces. Si se rompe la coordinación, vuelve al tarareo y al rasgueo único."
+          ]
+        }
+      ],
+      "takeaway": "Una nota vocal imprecisa no significa que hayas perdido la coordinación. Escucha la afinación por separado del pulso.",
+      "completion": ["Tarareas la frase sin guitarra y consigues añadir al menos parte del acompañamiento manteniendo los cambios previstos."]
+    },
+    {
+      "id": "wish-sing-one-phrase",
+      "title": "Una frase completa, dos veces",
+      "approximateDuration": "5–8 min",
+      "explanation": "Repite el mismo fragmento con el acompañamiento mínimo que permita sostenerlo. Puedes intentarlo a un tempo más lento, conservando la relación entre frase y cambios.",
+      "steps": [
+        {
+          "instructions": [
+            "Marca un pulso de entrada y canta la frase acompañándote con C y D.",
+            "Haz una pausa para respirar y repítela una segunda vez. No añadas otra frase hasta poder sostener esta.",
+            "Evalúa coordinación: ¿mantuviste el pulso y llegaron los cambios en su lugar?",
+            "Evalúa afinación aparte: canta de nuevo la frase sin guitarra y compárala con tu referencia.",
+            "Anota qué tarea necesita otra práctica. Si hoy solo sale tarareando, marca Practicado y retoma desde ahí."
+          ]
+        }
+      ],
+      "completion": ["Completas dos veces una frase vocal acompañándote sin perder el pulso y puedes distinguir una dificultad de afinación de una de coordinación."]
+    }
+  ],
+  "closing": {
+    "title": "Por hoy, ¿cómo ha ido?",
+    "statusHelp": "«Cómodo» describe tu percepción de esta sesión, no un dominio definitivo. Puedes continuar otro día y actualizar los mismos estados.",
+    "noteQuestion": "¿Qué frase elegiste? ¿Costó más afinar o coordinar la voz con los cambios? Si practicaste varios días, suma sus minutos."
+  }
+}

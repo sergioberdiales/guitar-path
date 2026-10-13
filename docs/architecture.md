@@ -8,7 +8,7 @@ Sitio estático con Vite, HTML, CSS y JavaScript vanilla. Vite es la única depe
 
 ## Contenido
 
-Las sesiones están en `public/content/course/block-01/week-01/session-01.json`, `session-02.json` y `session-03.json`. Ninguna incluye progreso del usuario. `index.json` es un catálogo mínimo: conserva el orden y enumera los nombres de fichero que debe cargar la aplicación. Añadir una sesión exige crear su JSON y añadirlo a este catálogo.
+Las seis sesiones están en `public/content/course/block-01/week-01/session-01.json` hasta `session-06.json`. Ninguna incluye progreso del usuario. `index.json` es un catálogo mínimo: conserva el orden y enumera los nombres de fichero que debe cargar la aplicación. Añadir una sesión exige crear su JSON y añadirlo a este catálogo.
 
 | Campo | Contenido |
 | --- | --- |
@@ -24,7 +24,7 @@ Cada ejercicio contiene `id`, `title`, `approximateDuration`, `explanation`, `st
 
 Los bloques opcionales se omiten. El resto de campos utilizados por la sesión son obligatorios. Un fallo al cargar o representar el contenido muestra una pantalla de reintento sin tocar el progreso. No se incorpora un motor de esquemas ni CMS; los tests validan el contrato básico del contenido actual.
 
-El mismo renderizador sirve las tres sesiones. `src/course.js` resuelve la sesión seleccionada a partir de `?session=<id-estable>` y construye sus enlaces. La URL sin parámetros sigue abriendo la Sesión 1; una selección desconocida también vuelve a ella. Esta navegación usa enlaces estáticos y parámetros de consulta, por lo que no necesita router ni reglas de reescritura en GitHub Pages. Mantener los IDs al corregir contenido permite conservar los estados existentes.
+El mismo renderizador sirve las seis sesiones y admite cualquier número de ejercicios: las sesiones 1–3 tienen cinco y las 4–6 tienen cuatro. `src/course.js` resuelve la sesión seleccionada a partir de `?session=<id-estable>` y construye sus enlaces. La URL sin parámetros sigue abriendo la Sesión 1; una selección desconocida también vuelve a ella. Esta navegación usa enlaces estáticos y parámetros de consulta, por lo que no necesita router ni reglas de reescritura en GitHub Pages. Mantener los IDs al corregir contenido permite conservar los estados existentes.
 
 ## Progreso local
 
@@ -46,7 +46,7 @@ No se guardan aperturas de soluciones, posición de scroll ni historial de sesio
 
 ## Exportación del progreso
 
-La acción **Exportar progreso** aparece de forma secundaria en el cierre. `createProgressExport` en `src/progress.js` recibe los metadatos de las sesiones conocidas y lee sus claves de progreso en `localStorage` en el momento de exportar. La interfaz le pasa las tres sesiones cargadas desde el catálogo. No enumera el almacenamiento ni recoge claves ajenas, sesiones desconocidas o preferencias del navegador.
+La acción **Exportar progreso** aparece de forma secundaria en el cierre. `createProgressExport` en `src/progress.js` recibe los metadatos de las sesiones conocidas y lee sus claves de progreso en `localStorage` en el momento de exportar. La interfaz le pasa las seis sesiones cargadas desde el catálogo. No enumera el almacenamiento ni recoge claves ajenas, sesiones desconocidas o preferencias del navegador.
 
 El formato de intercambio tiene su propia versión y conserva los IDs estables:
 
@@ -94,6 +94,6 @@ La opción **Settings → Pages → Source** debe ser **GitHub Actions**. El REA
 
 ## Antes del siguiente incremento
 
-- Probar las tres sesiones con la guitarra y ajustar el contenido a partir del uso real.
+- Probar las sesiones 4–6 con la guitarra y ajustar el contenido a partir del uso real.
 - Decidir si bastará un estado por sesión o harán falta intentos separados; hoy los cambios sustituyen el mismo registro.
 - Mantener fuera de alcance la importación y cualquier catálogo amplio de posiciones hasta que exista evidencia de uso.

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "id": "block-01-week-01-session-06",
+  "title": "De la tríada al fraseo",
+  "block": { "number": 1, "title": "Entender el mástil" },
+  "week": { "number": 1, "title": "Notas e intervalos" },
+  "number": 6,
+  "estimatedDuration": "30 min",
+  "objective": "Relacionar los acordes con sus terceras como notas melódicas concretas y recuperar la coordinación de guitarra y voz en las dos canciones.",
+  "introduction": {
+    "title": "El acorde te da una nota a la que llegar.",
+    "text": "Una nota objetivo es una nota del acorde que decides destacar o alcanzar. Hoy usarás solamente las terceras de D, C y G: ya están dentro de las tríadas que conoces. Trabaja en afinación estándar E–A–D–G–B–e.",
+    "examples": [{ "label": "Tu material melódico", "value": "D → F♯ · C → E · G → B" }],
+    "takeaway": "No necesitas una escala nueva. Puedes repartir la sesión entre varios días y retomar el último cambio difícil; registra la suma aproximada de minutos al cerrar."
+  },
+  "resources": [
+    {
+      "id": "justin-sweet-child-easy",
+      "type": "video",
+      "title": "How to play Sweet Child O Mine by Guns N Roses | Easy Guitar #JGTRSweetChild",
+      "author": "JustinGuitar Songs",
+      "youtubeId": "UDXEciRSGm8",
+      "approximateDuration": null,
+      "purpose": "La misma referencia de acompañamiento de la sesión 4. Consulta un cambio si lo necesitas; el patrón tríada–tercera de esta sesión es un ejercicio propio, no el riff original.",
+      "required": false,
+      "label": "Referencia de la sesión 4"
+    },
+    {
+      "id": "justin-wish-level-one",
+      "type": "video",
+      "title": "5 levels of Wish You Were Here on guitar",
+      "author": "JustinGuitar Songs",
+      "youtubeId": "sG_K8sGflBY",
+      "approximateDuration": "00:59–12:50 · nivel 1",
+      "purpose": "La misma consulta opcional de la introducción instrumental: solo nivel 1, desde 00:59 hasta antes de 12:51. Para la voz recupera la frase de la sesión 5 y su grabación de referencia; no hace falta revisar el vídeo hoy.",
+      "required": false,
+      "label": "Referencia de la sesión 5"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "locate-d-c-g-thirds",
+      "title": "Encontrar las terceras",
+      "approximateDuration": "5 min",
+      "explanation": "Localiza una tercera dentro de cada tríada, tócala por separado y escucha cómo se relaciona con su fundamental.",
+      "steps": [
+        {
+          "examples": [
+            { "label": "D → F♯", "value": "e · traste 2", "detail": "primera cuerda · 3" },
+            { "label": "C → E", "value": "B · traste 5", "detail": "segunda cuerda · 3" },
+            { "label": "G → B", "value": "G · traste 4", "detail": "tercera cuerda · 3" }
+          ],
+          "instructions": [
+            "Toca D 2–3–2 sobre G–B–e y después solo F♯ en e/2.",
+            "Toca C 5–5–3 y después solo E en B/5.",
+            "Toca G 4–3–3 y después solo B en G/4.",
+            "Repite nombrando la función antes de la nota: «tercera de D, F♯», y así con C y G."
+          ]
+        }
+      ],
+      "completion": ["Encuentras y nombras las terceras de D, C y G dentro de sus tríadas, aunque todavía tengas que pensar alguna."]
+    },
+    {
+      "id": "sweet-child-target-thirds",
+      "title": "Acorde en el 1, tercera en el 3",
+      "approximateDuration": "10 min",
+      "explanation": "Usa D–C–G–D como bucle reducido de Sweet Child O' Mine. Un compás de cuatro tiempos por acorde permite escuchar la tercera como nota objetivo.",
+      "steps": [
+        {
+          "examples": [{ "label": "Bucle y objetivos", "value": "D – C – G – D", "detail": "F♯ – E – B – F♯" }],
+          "instructions": [
+            "Cuenta 1–2–3–4. En el tiempo 1 toca la tríada; en el 2 déjala sonar sin otro ataque.",
+            "En el tiempo 3 toca únicamente su tercera, con un ataque claro; deja el 4 libre para preparar el cambio.",
+            "Repite el patrón en C, G y D usando E, B y F♯ como objetivos.",
+            "Haz dos vueltas seguidas a un tempo en el que puedas mantener la cuenta. Si cuesta elegir la cuerda, practica un solo acorde y después vuelve al bucle.",
+            "En una última vuelta escucha esas notas como una línea corta y deja espacio entre ataques. Mantén el mismo patrón."
+          ]
+        }
+      ],
+      "takeaway": "Este patrón prepara el fraseo: eliges una nota por su relación con el acorde. Es una adaptación de práctica a un compás por acorde; no reproduce las duraciones ni el riff del original. La grabación de Guns N' Roses está un semitono más baja: practica por tu cuenta en afinación estándar.",
+      "completion": ["Completas dos vueltas de D–C–G–D con la tríada en el 1 y su tercera en el 3, manteniendo la cuenta."]
+    },
+    {
+      "id": "wish-guitar-voice-continuity",
+      "title": "Wish You Were Here: sostener una vuelta",
+      "approximateDuration": "10 min",
+      "explanation": "Recupera la frase de la sesión 5 dentro de un recorrido más largo de la sección cantada. No necesitas aprender hoy toda la letra ni toda la melodía.",
+      "steps": [
+        {
+          "examples": [{ "label": "Recorrido de acordes", "value": "C – D – Am – G – D – C – Am – G" }]
+        },
+        {
+          "title": "Primera vuelta · Guitarra",
+          "instructions": [
+            "Usa acordes abiertos y un rasgueo sencillo. Para preparar los cambios puedes hacer una vuelta con cuatro pulsos por acorde.",
+            "Antes de añadir la voz, toca el fragmento de C y D respetando la entrada, los cambios y la duración de tu frase de referencia. El bucle preparatorio no obliga a comprimir la melodía."
+          ]
+        },
+        {
+          "title": "Segunda vuelta · Guitarra y voz",
+          "text": "Canta la frase corta que ya trabajaste sobre C y D. Después continúa solo con guitarra por Am–G–D–C–Am–G. Si ya conoces el resto de la sección y sus duraciones, puedes cantar más, pero basta esa primera frase."
+        },
+        {
+          "title": "Tercera vuelta · Continuidad",
+          "text": "Repite el recorrido a igual tempo. Si la voz te detiene, tararea o deja de cantar y continúa tocando. Recupera la entrada vocal en la siguiente vuelta, conservando el pulso."
+        }
+      ],
+      "completion": ["Completas una vuelta del recorrido sin detener el pulso. Has intentado la frase con voz y sabes si la coordinación necesita otra práctica."]
+    },
+    {
+      "id": "review-thirds-voice-flow",
+      "title": "Escuchar qué empieza a fluir",
+      "approximateDuration": "5 min",
+      "explanation": "Haz una comprobación breve de las tres tareas. El cierre conserva una única nota libre; puedes resumirlas ahí sin crear un registro nuevo.",
+      "steps": [
+        {
+          "instructions": [
+            "Toca una vuelta de tríada–tercera: ¿encontraste F♯, E y B sin detener la cuenta?",
+            "Canta de nuevo tu frase de Wish You Were Here con el acompañamiento mínimo: ¿los cambios y la voz llegaron juntos?",
+            "Distingue la afinación vocal de la coordinación: comprueba una nota dudosa con la referencia, sin guitarra.",
+            "Termina tocando una vuelta de la progresión que hoy haya fluido mejor, sin analizarla mientras suena.",
+            "Actualiza los estados de los ejercicios y anota una sola dificultad que quieras retomar."
+          ]
+        }
+      ],
+      "completion": ["Has completado el ejercicio de notas objetivo y una vuelta de C–D–Am–G–D–C–Am–G, y puedes describir cómo fueron reconocimiento de terceras, coordinación y fluidez."]
+    }
+  ],
+  "closing": {
+    "title": "Por hoy, ¿cómo ha ido?",
+    "statusHelp": "«Cómodo» describe tu percepción de esta sesión, no un dominio definitivo. Puedes continuar otro día y actualizar los mismos estados.",
+    "noteQuestion": "¿Qué necesita otra práctica: encontrar terceras, coordinar guitarra y voz o mantener la fluidez? Si practicaste varios días, suma sus minutos."
+  }
+}
