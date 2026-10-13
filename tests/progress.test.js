@@ -1,11 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { emptyProgress, loadProgress, normalizeProgress, saveProgress, storageKey } from '../src/progress.js';
 
-const session = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-01.json', import.meta.url), 'utf8'));
-const session2 = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-02.json', import.meta.url), 'utf8'));
-const session3 = JSON.parse(readFileSync(new URL('../public/content/course/block-01/week-01/session-03.json', import.meta.url), 'utf8'));
+import { sessions } from './helpers/course.js';
+const [session, session2, session3] = sessions;
 
 function memoryStorage() {
   const values = new Map();

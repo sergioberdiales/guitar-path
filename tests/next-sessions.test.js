@@ -1,11 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { createProgressExport, emptyProgress, exerciseStates, loadProgress, saveProgress, storageKey } from '../src/progress.js';
 
-const root = new URL('../public/content/course/block-01/week-01/', import.meta.url);
-const catalog = JSON.parse(readFileSync(new URL('index.json', root), 'utf8'));
-const sessions = catalog.sessions.map((file) => JSON.parse(readFileSync(new URL(file, root), 'utf8')));
+import { sessions } from './helpers/course.js';
 const [session4, session5, session6] = sessions.slice(3);
 
 test('las posiciones y funciones de D, C y G se corresponden con la afinación estándar', () => {

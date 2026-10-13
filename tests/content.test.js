@@ -1,15 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 
-const contentRoot = '../public/content/course/block-01/week-01/';
-const catalog = JSON.parse(readFileSync(new URL(`${contentRoot}index.json`, import.meta.url), 'utf8'));
-const sessions = catalog.sessions.map((filename) => JSON.parse(readFileSync(new URL(`${contentRoot}${filename}`, import.meta.url), 'utf8')));
+import { catalog, sessions } from './helpers/course.js';
 const [session, session2, session3] = sessions;
 
 test('el catálogo declara las seis sesiones en orden y todas cumplen el contrato de contenido', () => {
   assert.equal(catalog.schemaVersion, 1);
-  assert.deepEqual(catalog.sessions, ['session-01.json', 'session-02.json', 'session-03.json', 'session-04.json', 'session-05.json', 'session-06.json']);
+  assert.deepEqual(catalog.blocks[0].weeks.map(({ sessions }) => sessions.length), [2, 2, 2]);
   assert.deepEqual(sessions.map(({ number }) => number), [1, 2, 3, 4, 5, 6]);
   assert.deepEqual(sessions.map(({ id }) => id), [
     'block-01-week-01-session-01',
@@ -24,7 +21,7 @@ test('el catálogo declara las seis sesiones en orden y todas cumplen el contrat
   for (const knownSession of sessions) {
     assert.equal(knownSession.schemaVersion, 1);
     assert.deepEqual(knownSession.block, { number: 1, title: 'Entender el mástil' });
-    assert.deepEqual(knownSession.week, { number: 1, title: 'Notas e intervalos' });
+    assert.equal(knownSession.week.number, Math.ceil(knownSession.number / 2));
     assert.match(knownSession.estimatedDuration, /^\d+(?:–\d+)? min$/);
     assert.ok(knownSession.objective);
     assert.ok(knownSession.introduction.text);

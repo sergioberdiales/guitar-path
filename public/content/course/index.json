@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "blocks": [
+    {
+      "number": 1,
+      "title": "Entender el mástil",
+      "weeks": [
+        {
+          "number": 1,
+          "title": "Notas e intervalos",
+          "sessions": [
+            {
+              "id": "block-01-week-01-session-01",
+              "file": "block-01/week-01/session-01.json"
+            },
+            {
+              "id": "block-01-week-01-session-02",
+              "file": "block-01/week-01/session-02.json"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Tríadas en el mástil",
+          "sessions": [
+            {
+              "id": "block-01-week-01-session-03",
+              "file": "block-01/week-01/session-03.json"
+            },
+            {
+              "id": "block-01-week-01-session-04",
+              "file": "block-01/week-01/session-04.json"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Aplicación musical y voz",
+          "sessions": [
+            {
+              "id": "block-01-week-01-session-05",
+              "file": "block-01/week-01/session-05.json"
+            },
+            {
+              "id": "block-01-week-01-session-06",
+              "file": "block-01/week-01/session-06.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

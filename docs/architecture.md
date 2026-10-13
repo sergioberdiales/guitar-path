@@ -4,16 +4,20 @@
 
 Sitio estático con Vite, HTML, CSS y JavaScript vanilla. Vite es la única dependencia directa y solo interviene en desarrollo y build. No hay framework, router, fuentes remotas, backend ni base de datos.
 
-`src/main.js` carga el catálogo de la semana y sus sesiones JSON mediante `fetch`, representa la sesión seleccionada y conecta los controles. Las rutas usan `import.meta.env.BASE_URL`; `base: '/guitar-path/'` corresponde al subdirectorio del repositorio en GitHub Pages. El texto del JSON y las notas se escapan antes de insertarse en HTML. Los recursos externos solo admiten HTTP/HTTPS y se abren con `noopener noreferrer`.
+`src/main.js` carga el catálogo general del curso y sus sesiones JSON mediante `fetch`, representa el índice general o la sesión seleccionada y conecta los controles. Las rutas usan `import.meta.env.BASE_URL`; `base: '/guitar-path/'` corresponde al subdirectorio del repositorio en GitHub Pages. El texto del JSON y las notas se escapan antes de insertarse en HTML. Los recursos externos solo admiten HTTP/HTTPS y se abren con `noopener noreferrer`.
 
 ## Contenido
 
-Las seis sesiones están en `public/content/course/block-01/week-01/session-01.json` hasta `session-06.json`. Ninguna incluye progreso del usuario. `index.json` es un catálogo mínimo: conserva el orden y enumera los nombres de fichero que debe cargar la aplicación. Añadir una sesión exige crear su JSON y añadirlo a este catálogo.
+`public/content/course/index.json` es la única fuente de organización y navegación. Contiene `blocks[]` con `number`, `title` y `weeks[]`; cada semana tiene `number`, `title` y exactamente dos entradas `sessions[]`, cada una con `id` y `file` (ruta relativa al directorio del catálogo). El orden de estas listas define el recorrido, anterior y siguiente. Los bloques no tienen una duración fija.
+
+Hay un bloque, «Entender el mástil», con tres semanas: «Notas e intervalos» (01–02), «Tríadas en el mástil» (03–04) y «Aplicación musical y voz» (05–06). Las aproximadamente 24 semanas previstas son una orientación, sin semanas ni sesiones vacías en el catálogo.
+
+Los archivos permanecen en `public/content/course/block-01/week-01/session-01.json` hasta `session-06.json`. Esa ruta y los IDs son históricos: nunca se interpretan para obtener la semana. Se ha retirado el antiguo catálogo semanal. Los JSON de sesión ya no duplican `block` y `week`: `catalogEntries` y `attachPlacement` en `src/course.js` incorporan esos metadatos desde el catálogo al cargar, tanto para representar como para exportar. El título, número correlativo y ejercicios permanecen en el contenido. Añadir una semana exige dos sesiones reales y sus entradas de catálogo; no hay migración de progreso ni cambio de IDs.
 
 | Campo | Contenido |
 | --- | --- |
 | `schemaVersion`, `id` | Versión del formato e identificador estable de la sesión. |
-| `title`, `block`, `week`, `number` | Título, bloque y semana con `number`/`title`, número de sesión. |
+| `title`, `number` | Título y número correlativo de sesión en todo el curso. `block` y `week` se incorporan desde el catálogo en memoria. |
 | `estimatedDuration`, `objective` | Duración orientativa como texto y objetivo pedagógico. |
 | `introduction` | `title`, `text`, `examples` y `takeaway`. |
 | `resources` | Recursos con `id`, `type`, `title`, `author`, `youtubeId` o `url`, `approximateDuration`, `purpose`, `required` y `label` opcional. Una duración desconocida es `null`. |
@@ -24,7 +28,7 @@ Cada ejercicio contiene `id`, `title`, `approximateDuration`, `explanation`, `st
 
 Los bloques opcionales se omiten. El resto de campos utilizados por la sesión son obligatorios. Un fallo al cargar o representar el contenido muestra una pantalla de reintento sin tocar el progreso. No se incorpora un motor de esquemas ni CMS; los tests validan el contrato básico del contenido actual.
 
-El mismo renderizador sirve las seis sesiones y admite cualquier número de ejercicios: las sesiones 1–3 tienen cinco y las 4–6 tienen cuatro. `src/course.js` resuelve la sesión seleccionada a partir de `?session=<id-estable>` y construye sus enlaces. La URL sin parámetros sigue abriendo la Sesión 1; una selección desconocida también vuelve a ella. Esta navegación usa enlaces estáticos y parámetros de consulta, por lo que no necesita router ni reglas de reescritura en GitHub Pages. Mantener los IDs al corregir contenido permite conservar los estados existentes.
+El mismo renderizador sirve las seis sesiones y admite cualquier número de ejercicios: las sesiones 1–3 tienen cinco y las 4–6 tienen cuatro. `src/course.js` resuelve la sesión seleccionada a partir de `?session=<id-estable>` y construye sus enlaces. La URL sin parámetro de sesión abre el índice general; una selección desconocida también muestra el índice, con un aviso. La cabecera enlaza al índice. Cada sesión conserva el índice de ejercicios y ofrece anterior/siguiente con número y título e índice general, al principio y al final. Los límites del curso no generan enlaces inexistentes. Esta navegación usa enlaces estáticos y parámetros de consulta, por lo que no necesita router ni reglas de reescritura en GitHub Pages. Mantener los IDs al corregir contenido permite conservar los estados existentes.
 
 ## Progreso local
 
@@ -42,7 +46,13 @@ Todos los ejercicios empiezan en `pending`. Los únicos estados son `pending`, `
 
 Se recuperan los estados válidos de los IDs actuales y se ignoran campos obsoletos. JSON corrupto, permisos de almacenamiento o cuota agotada no impiden practicar: se muestra un aviso y los cambios siguen en memoria. No se sobrescribe automáticamente un registro corrupto al cargar; la siguiente edición guarda la sesión actual. Otros datos del navegador no se modifican.
 
-No se guardan aperturas de soluciones, posición de scroll ni historial de sesiones. La pantalla se abre siempre con las soluciones cerradas. El enlace inicial puede llevar al primer ejercicio pendiente cuando se recupera progreso.
+No se guardan aperturas de soluciones, posición de scroll ni historial de sesiones. La única preferencia nueva es `guitar-path:last-session:v1`, que guarda el ID de la última sesión abierta. Es independiente de las claves de progreso y queda fuera de la exportación; un fallo al escribirla no bloquea la práctica. La pantalla se abre siempre con las soluciones cerradas. El enlace inicial puede llevar al primer ejercicio pendiente cuando se recupera progreso.
+
+## Índice y continuación
+
+Bloques y semanas usan `<details>/<summary>` nativos, abiertos inicialmente y operables con teclado. El índice muestra únicamente las sesiones reales, su título, número, duración y estado. El estado se calcula con los ejercicios guardados: **Pendiente** si todos están pendientes; **En curso** si solo algunos están practicados o cómodos; **Practicada** si ninguno está pendiente; **Cómoda** si todos están cómodos. No se deduce finalización de una nota o duración. Un error de lectura muestra «Progreso no disponible», sin escribir ni reparar el registro.
+
+La acción de continuación selecciona la última sesión abierta válida; si aún no existe esa preferencia, la primera en curso, después la primera pendiente y finalmente la primera disponible para repasar. Los registros históricos carecen de fecha, por lo que no se intenta adivinar su orden cronológico. El enlace lleva al primer ejercicio pendiente de la sesión o a su cierre. La preferencia se actualiza al entrar en una sesión, no al visitar el índice. La navegación mediante enlaces normales conserva atrás/adelante y los enlaces directos con anclas.
 
 ## Exportación del progreso
 

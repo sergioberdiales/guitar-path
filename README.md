@@ -2,7 +2,7 @@
 
 Aplicación web para acompañar un curso estructurado de guitarra y registrar el progreso del alumno.
 
-La aplicación incluye las seis primeras sesiones de **Bloque 1 → Semana 1: Notas e intervalos**:
+La aplicación incluye seis sesiones del **Bloque 01 · Entender el mástil**, organizadas en tres semanas de dos sesiones:
 
 1. Del acorde conocido a 1–3–5.
 2. De la nota al intervalo.
@@ -10,6 +10,8 @@ La aplicación incluye las seis primeras sesiones de **Bloque 1 → Semana 1: No
 4. Las tríadas empiezan a convertirse en música.
 5. Wish You Were Here: guitarra y voz.
 6. De la tríada al fraseo.
+
+Semanas: **1 · Notas e intervalos** (01–02), **2 · Tríadas en el mástil** (03–04) y **3 · Aplicación musical y voz** (05–06). Se prevén unas 24 semanas, pero el índice solo muestra contenidos disponibles.
 
 No hay cuentas, backend ni sincronización.
 
@@ -22,11 +24,12 @@ npm ci
 npm run dev
 ```
 
-Abre la dirección local que imprime Vite, normalmente `http://localhost:5173/guitar-path/`. La Sesión 1 se carga directamente y el selector numerado permite cambiar entre las seis sin pantallas intermedias.
+Abre la dirección local que imprime Vite, normalmente `http://localhost:5173/guitar-path/`. La pantalla inicial muestra el índice del curso, con bloques y semanas desplegables. Los enlaces `?session=ID` siguen abriendo directamente la sesión.
 
 ## Practicar
 
-- Elige una sesión con los enlaces numerados situados antes del título. Sigue sus ejercicios en orden: cinco en las sesiones 1–3 y cuatro en las sesiones 4–6. En escritorio también hay un índice lateral.
+- Elige cualquier sesión en el índice, o usa la acción de continuación para retomar la última abierta y su primer ejercicio pendiente. Para registros antiguos sin última visita, se elige primero una sesión en curso y después una pendiente.
+- Dentro de la sesión, usa anterior/siguiente o vuelve al índice desde la cabecera. Sigue los ejercicios con el índice lateral (en móvil aparece encima de la sesión).
 - Los vídeos son opcionales y se abren en otra pestaña; no se cargan reproductores externos.
 - Revela por separado D mayor y D menor después de intentar construirlos.
 - Marca cada ejercicio como Pendiente, Practicado o Cómodo. Puedes cambiarlo también en el cierre.
@@ -46,7 +49,9 @@ npm run build
 npm run preview
 ```
 
-Los tests usan el runner de Node, sin dependencias adicionales. Cubren el catálogo y la navegación, el contrato de las seis sesiones, posiciones y funciones musicales, persistencia independiente, datos corruptos, estados inválidos, errores de almacenamiento y la exportación conjunta sin modificar el almacenamiento ni incluir claves ajenas.
+Los tests usan el runner de Node, sin dependencias adicionales. Verifican las tres semanas de dos sesiones, metadatos actuales en exportación y conservación de los registros históricos. Cubren el catálogo y la navegación, el contrato de las seis sesiones, posiciones y funciones musicales, persistencia independiente, datos corruptos, estados inválidos, errores de almacenamiento y la exportación conjunta sin modificar el almacenamiento ni incluir claves ajenas.
+
+La prueba opcional `tests/browser/navigation.cjs` comprueba el build con Chrome a 1440 y 375 px, incluidos enlaces directos, atrás/adelante, desplegables, exportación y registros históricos. Con Playwright ya disponible en el entorno, inicia `npm run preview` y ejecuta `node tests/browser/navigation.cjs`; admite `NODE_PATH` para localizar Playwright, `CHROME_PATH` para el navegador y `TEST_URL` para cambiar la URL. No añade dependencias al proyecto ni se ejecuta en el runner de Node.
 
 Para una comprobación manual: cambia estados desde un ejercicio y desde el cierre; introduce duración y nota; recarga o cierra y vuelve a abrir; comprueba que los valores permanecen y que las soluciones vuelven a estar ocultas. Prueba también una pantalla de 375 px y navegación con teclado.
 
@@ -55,10 +60,10 @@ Para comprobar la exportación, descarga el JSON desde el cierre y revisa sus me
 ## Archivos principales
 
 ```text
-public/content/course/block-01/week-01/index.json       Catálogo ordenado de sesiones
+public/content/course/index.json                        Catálogo de bloques, semanas y rutas
 public/content/course/block-01/week-01/session-*.json   Contenido pedagógico
-src/main.js                                             Carga y representación de la sesión
-src/course.js                                           Selección y enlaces de sesión
+src/main.js                                             Carga y representación del índice y sesiones
+src/course.js                                           Catálogo, enlaces, estados y continuación
 src/progress.js                                         Lectura, guardado y exportación local
 src/style.css                                           Diseño responsive
 tests/                                                  Pruebas con node:test

@@ -1,16 +1,71 @@
 import './style.css';
-import { resolveSession, sessionHref } from './course.js';
+import { attachPlacement, catalogEntries, continuation, progressSummary, rememberSession, resolveSession, sessionHref, sessionNeighbors } from './course.js';
 import { createProgressExport, exerciseStates, loadProgress, saveProgress } from './progress.js';
 
 const app = document.querySelector('#app');
-const weekPath = `${import.meta.env.BASE_URL}content/course/block-01/week-01/`;
-const coursePath = `${weekPath}index.json`;
+const contentPath = `${import.meta.env.BASE_URL}content/course/`;
+const coursePath = `${contentPath}index.json`;
 const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
 const number = (value) => String(value).padStart(2, '0');
 const arrow = '<span aria-hidden="true">↗</span>';
 const clock = '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>';
+
+function renderHeader(isIndex = false) {
+  return `<header class="site-header">
+    <a class="brand" href="${import.meta.env.BASE_URL}" aria-label="Guitar Path, índice del curso"><img src="${import.meta.env.BASE_URL}favicon.svg" width="36" height="36" alt="">Guitar<span>Path</span></a>
+    <span class="header-caption">UN POCO CADA DÍA. MÁS MÚSICA.</span>
+    <a class="index-link" href="${import.meta.env.BASE_URL}" ${isIndex ? 'aria-current="page"' : ''}>Índice del curso</a>
+  </header>`;
+}
+
+function renderSessionNavigation(session, sessions) {
+  const { previous, next } = sessionNeighbors(sessions, session.id);
+  const link = (item, label) => item ? `<a href="${escape(sessionHref(item.id, import.meta.env.BASE_URL))}"><span>${label} · Sesión ${number(item.number)}</span><strong>${escape(item.title)}</strong></a>` : '';
+  return `<nav class="session-pagination" aria-label="Navegación del curso">
+    ${link(previous, '← Anterior')}
+    <a class="pagination-index" href="${import.meta.env.BASE_URL}">Índice del curso</a>
+    ${link(next, 'Siguiente →')}
+  </nav>`;
+}
+
+function renderCourse(catalog, sessions, records) {
+  const resume = continuation(sessions, records);
+  const progress = records[resume.id].progress;
+  const anchor = resume.exercises.find(({ id }) => progress.exercises[id] === 'pending')?.id || 'closing';
+  const hasPractice = sessions.some(({ id }) => progressSummary(records[id].progress).practiced > 0);
+  const unavailable = sessions.some(({ id }) => records[id].error);
+  const sessionRow = (entry) => {
+    const session = sessions.find(({ id }) => id === entry.id);
+    const { state, label, practiced, total } = progressSummary(records[session.id].progress);
+    return `<li><a class="course-session" href="${escape(sessionHref(session.id, import.meta.env.BASE_URL))}">
+      <span class="session-tag">SESIÓN ${number(session.number)}</span>
+      <span class="course-session-title">${escape(session.title)}<span class="summary-subtitle">${escape(session.estimatedDuration)} · ${total} ejercicios</span></span>
+      <span class="course-progress" data-state="${records[session.id].error ? 'unknown' : state}">${records[session.id].error ? 'Progreso no disponible' : `${label}<span class="summary-subtitle">${practiced} de ${total} practicados</span>`}</span>
+      <span aria-hidden="true">→</span>
+    </a></li>`;
+  };
+  return `${renderHeader(true)}<main id="main" class="course-index" tabindex="-1">
+    <section class="session-hero" aria-labelledby="course-title">
+      <p class="eyebrow">Tu camino con la guitarra</p><h1 id="course-title">Índice del curso</h1>
+      <p class="objective">Cada bloque reúne un tema. Cada semana propone dos sesiones guiadas, para practicar a tu ritmo.</p>
+      <p class="field-help">Disponibles: ${catalog.blocks.length} bloque · ${catalog.blocks.reduce((total, block) => total + block.weeks.length, 0)} semanas · ${sessions.length} sesiones. El recorrido previsto es de unas 24 semanas; aquí solo aparecen los contenidos disponibles.</p>
+      ${new URLSearchParams(window.location.search).has('session') ? '<p role="status" class="field-help">La sesión solicitada no está disponible. Puedes elegir una en el índice.</p>' : ''}
+      <div class="hero-actions"><a class="primary-button" href="${escape(sessionHref(resume.id, import.meta.env.BASE_URL))}#${escape(anchor)}">${hasPractice ? 'Continuar la práctica' : 'Empezar la práctica'}<span aria-hidden="true">→</span></a><span class="resume-label">Sesión ${number(resume.number)} · ${escape(resume.title)}</span></div>
+      ${unavailable ? '<p role="alert" class="field-help">No se ha podido leer parte del progreso local. Esas sesiones muestran «Progreso no disponible». Los registros guardados no se han modificado.</p>' : ''}
+    </section>
+    <div class="course-blocks">${catalog.blocks.map((block) => `<details class="course-block" open>
+      <summary><span><span class="eyebrow">Bloque ${number(block.number)}</span><span class="block-heading">${escape(block.title)}</span></span><span class="expand-sign" aria-hidden="true">+</span></summary>
+      <div class="course-weeks">${block.weeks.map((week) => `<details class="course-week" open>
+        <summary><span>Semana ${week.number} · ${escape(week.title)}<span class="summary-subtitle">Dos sesiones guiadas</span></span><span class="expand-sign" aria-hidden="true">+</span></summary>
+        <ol class="course-sessions">${week.sessions.map(sessionRow).join('')}</ol>
+      </details>`).join('')}</div>
+    </details>`).join('')}</div>
+    <p class="field-help">Pendiente: ningún ejercicio practicado. En curso: algunos practicados. Practicada: todos practicados o cómodos. Cómoda: todos cómodos. El progreso se guarda en este navegador.</p>
+    <footer class="page-footer">Guitar Path / Menos pantalla, más guitarra.</footer>
+  </main>`;
+}
 
 function renderExamples(examples = []) {
   if (!examples.length) return '';
@@ -82,11 +137,7 @@ function renderSession(session, progress, sessions) {
   const firstPending = session.exercises.find(({ id }) => progress.exercises[id] === 'pending');
   const hasPractice = Object.values(progress.exercises).some((state) => state !== 'pending');
   return `
-    <header class="site-header">
-      <a class="brand" href="#main" aria-label="Guitar Path, inicio de la sesión"><img src="${import.meta.env.BASE_URL}favicon.svg" width="36" height="36" alt="">Guitar<span>Path</span></a>
-      <span class="header-caption">UN POCO CADA DÍA. MÁS MÚSICA.</span>
-      <span class="local-label"><span aria-hidden="true" class="local-dot"></span>Tu espacio de práctica</span>
-    </header>
+    ${renderHeader()}
     <div class="page-layout">
       <aside class="session-sidebar" aria-label="Índice de la sesión">
         <div class="course-context"><p class="eyebrow">Bloque ${number(session.block.number)}</p><p class="block-title">${escape(session.block.title)}</p><p class="week-label">Semana ${session.week.number} · ${escape(session.week.title)}</p></div>
@@ -101,10 +152,7 @@ function renderSession(session, progress, sessions) {
       <main id="main" tabindex="-1">
         <section class="session-hero" aria-labelledby="session-title">
           <div class="session-kicker"><span class="session-tag">SESIÓN ${number(session.number)}</span><span>${escape(session.week.title)}</span></div>
-          <nav class="session-switcher" aria-label="Sesiones de la semana">
-            <span>Sesiones</span>
-            ${sessions.map((knownSession) => `<a href="${escape(sessionHref(knownSession.id, import.meta.env.BASE_URL))}" title="${escape(knownSession.title)}" ${knownSession.id === session.id ? 'aria-current="page"' : ''}>${number(knownSession.number)}</a>`).join('')}
-          </nav>
+          ${renderSessionNavigation(session, sessions)}
           <h1 id="session-title">${escape(session.title)}</h1>
           <p class="objective-label">Tu objetivo de hoy</p>
           <p class="objective">${escape(session.objective)}</p>
@@ -129,6 +177,7 @@ function renderSession(session, progress, sessions) {
             <p class="field-help" id="export-feedback" role="status"></p>
           </div>
         </section>
+        ${renderSessionNavigation(session, sessions)}
         <footer class="page-footer"><span>Guitar Path <span aria-hidden="true">/</span> Menos pantalla, más guitarra.</span><a href="#main">Volver arriba ↑</a></footer>
       </main>
     </div>
@@ -219,16 +268,19 @@ async function start() {
     const catalogResponse = await fetch(coursePath);
     if (!catalogResponse.ok) throw new Error(`Course request failed: ${catalogResponse.status}`);
     const catalog = await catalogResponse.json();
-    if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.sessions) || !catalog.sessions.length) {
-      throw new Error('Invalid course catalog');
-    }
-    const sessions = await Promise.all(catalog.sessions.map(async (filename) => {
-      const response = await fetch(`${weekPath}${filename}`);
+    const sessions = await Promise.all(catalogEntries(catalog).map(async (entry) => {
+      const response = await fetch(`${contentPath}${entry.file}`);
       if (!response.ok) throw new Error(`Session request failed: ${response.status}`);
-      return response.json();
+      return attachPlacement(entry, await response.json());
     }));
     const session = resolveSession(sessions, window.location.search);
-    if (!session) throw new Error('Course has no sessions');
+    if (!session) {
+      const records = Object.fromEntries(sessions.map((item) => [item.id, loadProgress(item)]));
+      app.innerHTML = renderCourse(catalog, sessions, records);
+      document.title = 'Índice del curso · Guitar Path';
+      return;
+    }
+    rememberSession(session.id);
     const { progress, error } = loadProgress(session);
     app.innerHTML = renderSession(session, progress, sessions);
     document.title = `${session.title} · Guitar Path`;
@@ -241,8 +293,8 @@ async function start() {
     // Exercise anchors also work when opening a bookmarked session directly.
     if (window.location.hash) document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
   } catch (error) {
-    console.error('No se pudo abrir la sesión.', error);
-    app.innerHTML = '<main id="main" class="loading"><p class="eyebrow">Guitar Path</p><h1>No se ha podido abrir la sesión.</h1><p>Comprueba tu conexión y vuelve a intentarlo. Tu progreso guardado no se ha modificado.</p><button class="primary-button" id="retry" type="button">Volver a intentar</button></main>';
+    console.error('No se pudo abrir el curso.', error);
+    app.innerHTML = '<main id="main" class="loading"><p class="eyebrow">Guitar Path</p><h1>No se ha podido abrir el curso.</h1><p>Comprueba tu conexión y vuelve a intentarlo. Tu progreso guardado no se ha modificado.</p><button class="primary-button" id="retry" type="button">Volver a intentar</button></main>';
     document.querySelector('#retry').addEventListener('click', () => window.location.reload());
   }
 }
